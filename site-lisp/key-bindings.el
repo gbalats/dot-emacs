@@ -17,7 +17,7 @@
 (global-set-key [f5] 'no-easy-keys-minor-mode)
 
 ;;; Rebind `C-x C-b' for `buffer-menu'
-(global-set-key "\C-x\C-b" 'buffer-menu)
+(global-set-key "\C-x\C-b" 'ibuffer)
 
 ;;; Since `M-<SPC>' is used by gnome, use `C-c <SPC>' instead
 (global-set-key (kbd "C-c <SPC>") 'just-one-space)
