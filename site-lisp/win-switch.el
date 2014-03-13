@@ -1301,7 +1301,7 @@ DISPATCH-KEYS, if non-nil, should be a list of keys that will be
 bound globally to `win-switch-dispatch'."
   (interactive "SModifier symbol: ")
   (when (eq modifier 'shift)
-    (error The "shift modifier cannot be used for dispatch"))
+    (error "The shift modifier cannot be used for dispatch"))
   (win-switch-set-keys '([up]) 'up)
   (win-switch-set-keys '([down]) 'down)
   (win-switch-set-keys '([left]) 'left)
