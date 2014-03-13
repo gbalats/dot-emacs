@@ -166,3 +166,6 @@ it)"
 (provide 'flymake-cursor)
 
 ;;; flymake-cursor.el ends here
+;; Local Variables:
+;; byte-compile-warnings: (not cl-functions)
+;; End:
