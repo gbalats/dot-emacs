@@ -1,5 +1,8 @@
 ;;; Code:
 
+(require 'compile)
+(require 'cl)
+
 (defun project-root-find (command-string)
   (let ((tools '(("make" . "Makefile")
                  ("ant"  . "build.xml")
@@ -33,3 +36,6 @@
 (provide 'project-root)
 
 ;;; project-root.el ends here
+;; Local Variables:
+;; byte-compile-warnings: (not cl-functions)
+;; End:
