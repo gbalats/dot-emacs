@@ -1,20 +1,34 @@
-EMACS     := emacs
+EMACS     := emacs --batch
 
 emacs.dir := $(HOME)/.emacs.d
-elisp     := init.el
-elisp     += $(wildcard site-lisp/*.el)
-elisp     += $(wildcard lb-datalog-mode/*.el)
+elisp.src := init.el
+elisp.src += $(wildcard site-lisp/*.el)
+elisp.src += $(wildcard lb-datalog-mode/*.el)
+elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))
+
+# Compiled files
+elisp.nocomp := $(addprefix $(emacs.dir)/, init.el site-lisp/setup-theme.el)
+elisp.out    += $(addsuffix c,$(filter-out $(elisp.nocomp),$(elisp.out)))
 
 include ../common.mk
+
 
 # Installing Elisp files
 
 .PHONY: all
-all: $(addprefix $(emacs.dir)/, $(elisp))
+all: $(elisp.out)
 
 $(emacs.dir)/%.el: %.el
 	@echo "... [elisp] installing $* ..."
 	$(INSTALL) -m 444 -D $< $@
+
+$(filter %.elc,$(elisp.out)): %.elc: %.el
+	$(EMACS) -L $(emacs.dir)/site-lisp -f batch-byte-compile $<
+
+.PHONY: clean.elc
+clean.elc:
+	rm -f $(filter %.elc,$(elisp.out))
+
 
 # Thesaurus Specific
 
@@ -29,3 +43,9 @@ $(thesaurus):
 
 .PHONY: thesaurus
 thesaurus: $(thesaurus)
+
+
+# Dependencies
+
+$(addprefix $(emacs.dir)/site-lisp/, inf-groovy.elc groovy-electric.elc): \
+   $(emacs.dir)/site-lisp/groovy-mode.el
