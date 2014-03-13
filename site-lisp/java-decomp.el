@@ -24,7 +24,8 @@
       (setq buffer-read-only t)
       (set-buffer-modified-p nil)
       (goto-char (point-min))
-      (javap-mode)
+      (when (fboundp 'javap-mode)
+        (javap-mode))
       (rename-buffer (concat java-class-name
                              " ("
                              (file-name-nondirectory jar-file-name)
@@ -43,7 +44,8 @@
         (setq buffer-read-only t)
         (set-buffer-modified-p nil)
         (goto-char (point-min))
-        (javap-mode)
+        (when (fboundp 'javap-mode)
+          (javap-mode))
         (current-buffer))))
    ((java-decomp--alternate-handler op args))))
 
