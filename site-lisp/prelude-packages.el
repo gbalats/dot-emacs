@@ -1,4 +1,7 @@
-(defvar prelude-packages
+(require 'cl)
+(require 'package)
+
+(defconst prelude-packages
   '(auctex clojure-mode coffee-mode deft expand-region
            gist groovy-mode haskell-mode magit javap-mode
            markdown-mode paredit projectile python color-theme
@@ -26,3 +29,7 @@
 
 (provide 'prelude-packages)
 ;;; prelude-packages.el ends here
+
+;; Local Variables:
+;; byte-compile-warnings: (not cl-functions)
+;; End:
