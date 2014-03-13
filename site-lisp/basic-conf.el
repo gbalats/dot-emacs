@@ -11,7 +11,7 @@
 (display-time)
 
 ;; to change the default tab size
-(setq default-tab-width 4)
+(setq tab-width 4)
 
 ;; to stop making backup files
 (setq make-backup-files nil)
