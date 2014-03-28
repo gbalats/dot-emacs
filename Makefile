@@ -4,7 +4,9 @@ emacs.dir := $(HOME)/.emacs.d
 elisp.src := init.el
 elisp.src += $(wildcard site-lisp/*.el)
 elisp.src += $(wildcard lb-datalog-mode/*.el)
+elisp.src += $(addprefix use-package/, use-package.el bind-key.el)
 elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))
+emacs.lib := $(addprefix -L $(emacs.dir)/,site-lisp use-package)
 
 # Compiled files
 elisp.nocomp := $(addprefix $(emacs.dir)/, init.el site-lisp/setup-theme.el)
@@ -23,7 +25,7 @@ $(emacs.dir)/%.el: %.el
 	$(INSTALL) -m 444 -D $< $@
 
 $(filter %.elc,$(elisp.out)): %.elc: %.el
-	$(EMACS) -L $(emacs.dir)/site-lisp -f batch-byte-compile $<
+	$(EMACS) $(emacs.lib) -f batch-byte-compile $<
 
 .PHONY: clean.elc
 clean.elc:
@@ -49,3 +51,6 @@ thesaurus: $(thesaurus)
 
 $(addprefix $(emacs.dir)/site-lisp/, inf-groovy.elc groovy-electric.elc): \
    $(emacs.dir)/site-lisp/groovy-mode.el
+
+$(emacs.dir)/use-package/use-package.elc: \
+   $(emacs.dir)/use-package/bind-key.el

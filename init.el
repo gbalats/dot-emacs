@@ -20,56 +20,82 @@
 
 ;; load files
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
-(add-to-list 'load-path "~/.emacs.d/lb-datalog-mode/")
+(add-to-list 'load-path "~/.emacs.d/use-package/")
 
-;; install prelude packages (and other packages) on emacs 24
-(when (>= emacs-major-version 24)
-  (require 'prelude-packages)
-  (require 'cedet))
 
 (require 'basic-conf)
 (require 'key-bindings)
-(require 'win-switch)
-(require 'no-easy-keys)
-(require 'tbemail)
 (require 'flymake)
 (require 'flymake-cursor)
 (require 'java-decomp)
 (require 'project-root)
-(require 'no-selection-copy)
-(require 'lb-datalog-mode)
-(require 'setup-theme)
+(require 'use-package)
 
 
-;; Uncomment this line to give emacs access to clipboard contents
-;; (require 'xclip)
+;; Various packages
+(use-package prelude-packages)
+(use-package cedet)
+(use-package tbemail)
+(use-package setup-theme)
 
-;; enable / disable easy keys by default
-(no-easy-keys-minor-mode 0)
 
-;; window-switching parameters
-(win-switch-setup-keys-ijkl "\C-xo")
-(setq win-switch-idle-time 1.0)
-(setq win-switch-other-window-first nil)
+;; Dired
+(use-package find-dired
+  :bind ("C-c f" . find-name-dired))
+
+;; Electric pairs
+(use-package electric
+  :commands electric-pair-mode
+  :idle (electric-pair-mode t))
+
+;; LB-Datalog mode
+(use-package lb-datalog-mode
+  :mode "\\.logic$"
+  :load-path "lb-datalog-mode/")
+
+;; window-switching
+(use-package win-switch
+  :commands win-switch-mode
+  :idle (win-switch-mode)
+  :config
+  (progn
+    (win-switch-setup-keys-ijkl "\C-xo")
+    (setq win-switch-idle-time 1.0)
+    (setq win-switch-other-window-first nil)))
+
+;; communicating with clipboard
+(use-package xclip
+  :disabled t)
+
+;; enable / disable easy keys (e.g., arrows)
+(use-package no-easy-keys
+  :bind ("<f5>" . no-easy-keys-minor-mode)
+  :init (no-easy-keys-minor-mode 0))
 
 ;; AucTex
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil)
-(add-hook 'LaTeX-mode-hook 'auto-fill-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(setq reftex-plug-into-AUCTeX t)
-(setq TeX-PDF-mode t)
+(use-package tex-site
+  :config
+  (progn
+    (setq TeX-auto-save t)
+    (setq TeX-parse-self t)
+    (setq-default TeX-master nil)
+    (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
+    (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+    (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+    (setq reftex-plug-into-AUCTeX t)
+    (setq TeX-PDF-mode t)))
 
 ;; Tramp
-(setq tramp-default-method "rsync")
-(setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave-dir")
-(setq password-cache-expiry 3600)
+(use-package tramp
+  :config
+  (progn
+    (setq tramp-default-method "rsync")
+    (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave-dir")
+    (setq password-cache-expiry 3600)))
 
 ;; FlyMake
-(defun my-flymake-show-next-error()
+(defun my:flymake-show-next-error()
   (interactive)
   (flymake-goto-next-error)
   (flymake-display-err-menu-for-current-line))
@@ -81,25 +107,33 @@
                       (global-set-key (kbd "C-c C-v") 'my-flymake-show-next-error))))
 
 ;; PHP mode
-(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
-(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
+(use-package php-mode
+  :mode "\\.php$")
 
-;; Groovy
-(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
-(add-to-list 'auto-mode-alist '("\\.groovy$" . groovy-mode))
-(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+;; Groovy mode
+(use-package groovy-mode
+  :mode "\\.groovy$"
+  :interpreter "groovy")
 
 ;; Whitespace mode
-(require 'whitespace)
-(setq whitespace-style '(face empty tabs lines-tail trailing))
-(global-whitespace-mode t)
-(setq whitespace-global-modes
-      '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
-               shell-script-mode sh-mode))
+(use-package whitespace
+  :init
+  (progn
+    (setq whitespace-style '(face empty tabs lines-tail trailing))
+    (global-whitespace-mode t)
+    (setq whitespace-global-modes
+          '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
+                   shell-script-mode sh-mode))))
 
 ;; Thesaurus
-(when (>= emacs-major-version 24)
-  (require 'synonyms)
-  (setq synonyms-file        "~/.emacs.d/thesaurus/mthesaur.txt")
-  (setq synonyms-cache-file  "~/.emacs.d/thesaurus/mthesaur.txt.cache"))
+(use-package synonyms
+  :config
+  (progn
+    (setq synonyms-file        "~/.emacs.d/thesaurus/mthesaur.txt")
+    (setq synonyms-cache-file  "~/.emacs.d/thesaurus/mthesaur.txt.cache")))
+
+;; Copying things without selecting them
+(use-package no-selection-copy
+  :bind (("C-c w" . copy-word)
+         ("C-c l" . copy-line)
+         ("C-c p" . copy-paragraph)))
