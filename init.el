@@ -107,6 +107,11 @@
          ("C-c l" . copy-line)
          ("C-c p" . copy-paragraph)))
 
+;; Magit
+(use-package magit
+  :ensure magit
+  :commands magit-status
+  :bind ("C-c m" . magit-status))
 
 ;;-----------------------
 ;; Extra packages (dist)

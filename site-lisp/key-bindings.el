@@ -15,6 +15,3 @@
 
 ;; Re-compile shortcut
 (global-set-key (kbd "C-c c") 'recompile)
-
-;; Magit-status shortcut
-(global-set-key (kbd "C-c m") 'magit-status)
