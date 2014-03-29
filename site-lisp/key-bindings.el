@@ -7,9 +7,6 @@
 
 (provide 'key-bindings)
 
-;; set the keybinding so that f3 will start the shell
-(global-set-key [f3] 'shell)
-
 ;; set the keybinding so that you can use f4 for goto line
 (global-set-key [f4] 'goto-line)
 

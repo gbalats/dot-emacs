@@ -49,6 +49,10 @@
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
 
+;; Open shell with <f3>
+(use-package shell
+  :bind ("<f3>" . shell))
+
 ;; Electric pairs
 (use-package electric
   :commands electric-pair-mode
