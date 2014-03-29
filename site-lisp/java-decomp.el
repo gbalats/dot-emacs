@@ -19,7 +19,7 @@
                          "/" "." (file-name-sans-extension class-file-name))))
     (with-current-buffer (buffer-name)
       (erase-buffer)
-      (call-process "javap" nil t nil "-verbose"
+      (call-process "javap" nil t nil "-private" "-verbose"
                     "-classpath" jar-file-name java-class-name)
       (setq buffer-read-only t)
       (set-buffer-modified-p nil)
