@@ -58,10 +58,9 @@
   :commands win-switch-mode
   :idle (win-switch-mode)
   :config
-  (progn
-    (win-switch-setup-keys-ijkl "\C-xo")
-    (setq win-switch-idle-time 1.0)
-    (setq win-switch-other-window-first nil)))
+  (win-switch-setup-keys-ijkl "\C-xo")
+  (setq win-switch-idle-time 1.0)
+  (setq win-switch-other-window-first nil))
 
 ;; communicating with clipboard
 (use-package xclip
@@ -75,24 +74,22 @@
 ;; AucTex
 (use-package tex-site
   :config
-  (progn
-    (setq TeX-auto-save t)
-    (setq TeX-parse-self t)
-    (setq-default TeX-master nil)
-    (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
-    (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-    (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-    (setq reftex-plug-into-AUCTeX t)
-    (setq TeX-PDF-mode t)))
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (setq reftex-plug-into-AUCTeX t)
+  (setq TeX-PDF-mode t))
 
 ;; Tramp
 (use-package tramp
   :config
-  (progn
-    (setq tramp-default-method "rsync")
-    (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave-dir")
-    (setq password-cache-expiry 3600)))
+  (setq tramp-default-method "rsync")
+  (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave-dir")
+  (setq password-cache-expiry 3600))
 
 ;; FlyMake
 (defun my:flymake-show-next-error()
@@ -118,19 +115,17 @@
 ;; Whitespace mode
 (use-package whitespace
   :init
-  (progn
-    (setq whitespace-style '(face empty tabs lines-tail trailing))
-    (global-whitespace-mode t)
-    (setq whitespace-global-modes
-          '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
-                   shell-script-mode sh-mode))))
+  (setq whitespace-style '(face empty tabs lines-tail trailing))
+  (global-whitespace-mode t)
+  (setq whitespace-global-modes
+        '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
+                 shell-script-mode sh-mode)))
 
 ;; Thesaurus
 (use-package synonyms
   :config
-  (progn
-    (setq synonyms-file        "~/.emacs.d/thesaurus/mthesaur.txt")
-    (setq synonyms-cache-file  "~/.emacs.d/thesaurus/mthesaur.txt.cache")))
+  (setq synonyms-file        "~/.emacs.d/thesaurus/mthesaur.txt")
+  (setq synonyms-cache-file  "~/.emacs.d/thesaurus/mthesaur.txt.cache"))
 
 ;; Copying things without selecting them
 (use-package no-selection-copy
