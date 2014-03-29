@@ -43,14 +43,17 @@
 
 ;; Dired
 (use-package find-dired
+  :defer t
   :bind ("C-c f" . find-name-dired))
 
 ;; Rebind `C-x C-b' for `buffer-menu'
 (use-package ibuffer
+  :defer t
   :bind ("C-x C-b" . ibuffer))
 
 ;; Open shell with <f3>
 (use-package shell
+  :defer t
   :bind ("<f3>" . shell))
 
 ;; Electric pairs
