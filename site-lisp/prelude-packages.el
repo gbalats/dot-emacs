@@ -10,21 +10,16 @@
            ac-dabbrev synonyms)
   "A list of packages to ensure are installed at launch.")
 
-(defun prelude-packages-installed-p ()
-  (loop for p in prelude-packages
-        when (not (package-installed-p p)) do (return nil)
-        finally (return t)))
-
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
 
 ;; fetch the list of packages available
-(when (not package-archive-contents)
+(unless package-archive-contents
   (package-refresh-contents))
 
 ;; install the missing packages
 (dolist (package prelude-packages)
-  (when (not (package-installed-p package))
+  (unless (package-installed-p package)
     (package-install package)))
 
 (provide 'prelude-packages)
