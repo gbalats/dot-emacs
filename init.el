@@ -34,24 +34,50 @@
 
 ;; Various packages
 (use-package prelude-packages)
-(use-package cedet)
-(use-package tbemail)
 (use-package setup-theme)
 
+
+;;---------------------
+;; Builtin packages
+;;---------------------
 
 ;; Dired
 (use-package find-dired
   :bind ("C-c f" . find-name-dired))
+
+;; Rebind `C-x C-b' for `buffer-menu'
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer))
 
 ;; Electric pairs
 (use-package electric
   :commands electric-pair-mode
   :idle (electric-pair-mode t))
 
-;; LB-Datalog mode
-(use-package lb-datalog-mode
-  :mode "\\.logic$"
-  :load-path "lb-datalog-mode/")
+;; Tramp
+(use-package tramp
+  :config
+  (setq tramp-default-method "rsync")
+  (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave-dir")
+  (setq password-cache-expiry 3600))
+
+;; Whitespace mode
+(use-package whitespace
+  :init
+  (setq whitespace-style '(face empty tabs lines-tail trailing))
+  (global-whitespace-mode t)
+  (setq whitespace-global-modes
+        '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
+                 shell-script-mode sh-mode)))
+
+(use-package cedet)
+
+
+;;-----------------------
+;; Extra packages (user)
+;;-----------------------
+
+(use-package tbemail)
 
 ;; window-switching
 (use-package win-switch
@@ -71,6 +97,23 @@
   :bind ("<f5>" . no-easy-keys-minor-mode)
   :init (no-easy-keys-minor-mode 0))
 
+;; Copying things without selecting them
+(use-package no-selection-copy
+  :bind (("C-c w" . copy-word)
+         ("C-c l" . copy-line)
+         ("C-c p" . copy-paragraph)))
+
+
+;;-----------------------
+;; Extra packages (dist)
+;;-----------------------
+
+;; Thesaurus
+(use-package synonyms
+  :config
+  (setq synonyms-file        "~/.emacs.d/thesaurus/mthesaur.txt")
+  (setq synonyms-cache-file  "~/.emacs.d/thesaurus/mthesaur.txt.cache"))
+
 ;; AucTex
 (use-package tex-site
   :ensure auctex
@@ -85,13 +128,6 @@
   (setq reftex-plug-into-AUCTeX t)
   (setq TeX-PDF-mode t))
 
-;; Tramp
-(use-package tramp
-  :config
-  (setq tramp-default-method "rsync")
-  (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave-dir")
-  (setq password-cache-expiry 3600))
-
 ;; FlyMake
 (defun my:flymake-show-next-error()
   (interactive)
@@ -104,6 +140,11 @@
                       (flymake-mode t)
                       (global-set-key (kbd "C-c C-v") 'my-flymake-show-next-error))))
 
+
+;;-----------------------
+;; Major Modes
+;;-----------------------
+
 ;; PHP mode
 (use-package php-mode
   :mode "\\.php$")
@@ -113,23 +154,7 @@
   :mode "\\.groovy$"
   :interpreter "groovy")
 
-;; Whitespace mode
-(use-package whitespace
-  :init
-  (setq whitespace-style '(face empty tabs lines-tail trailing))
-  (global-whitespace-mode t)
-  (setq whitespace-global-modes
-        '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
-                 shell-script-mode sh-mode)))
-
-;; Thesaurus
-(use-package synonyms
-  :config
-  (setq synonyms-file        "~/.emacs.d/thesaurus/mthesaur.txt")
-  (setq synonyms-cache-file  "~/.emacs.d/thesaurus/mthesaur.txt.cache"))
-
-;; Copying things without selecting them
-(use-package no-selection-copy
-  :bind (("C-c w" . copy-word)
-         ("C-c l" . copy-line)
-         ("C-c p" . copy-paragraph)))
+;; LB-Datalog mode
+(use-package lb-datalog-mode
+  :mode "\\.logic$"
+  :load-path "lb-datalog-mode/")

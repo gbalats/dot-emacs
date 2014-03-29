@@ -13,9 +13,6 @@
 ;; set the keybinding so that you can use f4 for goto line
 (global-set-key [f4] 'goto-line)
 
-;;; Rebind `C-x C-b' for `buffer-menu'
-(global-set-key "\C-x\C-b" 'ibuffer)
-
 ;;; Since `M-<SPC>' is used by gnome, use `C-c <SPC>' instead
 (global-set-key (kbd "C-c <SPC>") 'just-one-space)
 
