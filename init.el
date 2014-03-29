@@ -126,6 +126,7 @@
 ;; AucTex
 (use-package tex-site
   :ensure auctex
+  :mode ("\\.tex\\'" . latex-mode)
   :config
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
