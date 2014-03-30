@@ -119,7 +119,7 @@
 
 ;; Magit
 (use-package magit
-  :ensure magit
+  :ensure t
   :commands magit-status
   :bind ("C-c m" . magit-status))
 
