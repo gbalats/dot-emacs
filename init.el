@@ -23,17 +23,14 @@
 (add-to-list 'load-path "~/.emacs.d/use-package/")
 
 
-(require 'basic-conf)
-(require 'key-bindings)
-(require 'flymake)
-(require 'flymake-cursor)
-(require 'java-decomp)
+(require 'basic-conf)                  ; basic configuration
+(require 'java-decomp)                 ; auto-decompress Java bytecode
+(require 'key-bindings)                ; global keybindings
 (require 'use-package)
 
-
 ;; Various packages
-(use-package prelude-packages)
-(use-package setup-theme)
+(require 'flymake)
+(require 'flymake-cursor)
 
 
 ;;---------------------
@@ -91,8 +88,6 @@
 ;; Extra packages (user)
 ;;-----------------------
 
-(use-package tbemail)
-
 ;; window-switching
 (use-package win-switch
   :commands win-switch-mode
@@ -117,10 +112,16 @@
          ("C-c l" . copy-line)
          ("C-c p" . copy-paragraph)))
 
+(use-package tbemail)
+
 
 ;;-----------------------
 ;; Extra packages (dist)
 ;;-----------------------
+
+(use-package package
+  :config
+  (use-package prelude-packages))
 
 ;; Magit
 (use-package magit
@@ -135,6 +136,7 @@
 
 ;; Thesaurus
 (use-package synonyms
+  :ensure t
   :config
   (setq synonyms-file        "~/.emacs.d/thesaurus/mthesaur.txt")
   (setq synonyms-cache-file  "~/.emacs.d/thesaurus/mthesaur.txt.cache"))
@@ -153,6 +155,29 @@
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   (setq reftex-plug-into-AUCTeX t)
   (setq TeX-PDF-mode t))
+
+(use-package zenburn-theme
+  :ensure t)
+
+;; Transparent zenburn theme
+(use-package color-theme
+  :ensure t
+  :config
+  (use-package zenburn-theme)
+
+  (defun on-frame-open (frame)
+    (unless (display-graphic-p frame))
+    (set-face-background 'default "unspecified-bg" frame))
+
+  (defun on-after-init ()
+    (let ((frame (selected-frame)))
+      (unless (display-graphic-p frame)
+        (set-face-background 'default "unspecified-bg" frame))))
+
+  (add-hook 'after-make-frame-functions 'on-frame-open)
+  (add-hook 'window-setup-hook 'on-after-init)
+  (menu-bar-mode 0))
+
 
 ;; FlyMake
 (defun my:flymake-show-next-error()
