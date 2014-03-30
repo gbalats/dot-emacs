@@ -117,15 +117,16 @@
          ("C-c l" . copy-line)
          ("C-c p" . copy-paragraph)))
 
+
+;;-----------------------
+;; Extra packages (dist)
+;;-----------------------
+
 ;; Magit
 (use-package magit
   :ensure t
   :commands magit-status
   :bind ("C-c m" . magit-status))
-
-;;-----------------------
-;; Extra packages (dist)
-;;-----------------------
 
 ;; Google this
 (use-package google-this
