@@ -28,10 +28,6 @@
 (require 'key-bindings)                ; global keybindings
 (require 'use-package)
 
-;; Various packages
-(require 'flymake)
-(require 'flymake-cursor)
-
 
 ;;---------------------
 ;; Builtin packages
@@ -178,19 +174,23 @@
   (add-hook 'window-setup-hook 'on-after-init)
   (menu-bar-mode 0))
 
-
 ;; FlyMake
-(defun my:flymake-show-next-error()
-  (interactive)
-  (flymake-goto-next-error)
-  (flymake-display-err-menu-for-current-line))
+(use-package flymake
+  :init (defun my:flymake-show-next-error()
+          (interactive)
+          (flymake-goto-next-error)
+          (flymake-display-err-menu-for-current-line))
+  :config (add-hook 'c-mode-common-hook 'flymake-mode)
+  :bind ("C-c C-v" . my:flymake-show-next-error)
+  :ensure t)
 
-;; Setting some C / C++ defaults
-(add-hook 'c-mode-common-hook
-          (function (lambda ()
-                      (flymake-mode t)
-                      (global-set-key (kbd "C-c C-v") 'my-flymake-show-next-error))))
+(use-package flymake-cursor
+  :ensure t)
 
+(use-package flycheck
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'flycheck-mode))
 
 ;;-----------------------
 ;; Major Modes
