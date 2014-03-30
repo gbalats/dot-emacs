@@ -127,6 +127,11 @@
 ;; Extra packages (dist)
 ;;-----------------------
 
+;; Google this
+(use-package google-this
+  :ensure t
+  :init (google-this-mode t))
+
 ;; Thesaurus
 (use-package synonyms
   :config
