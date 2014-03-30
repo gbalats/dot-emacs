@@ -1,6 +1,20 @@
-;; Handle Java .class files
+;;; java-decomp --- Java bytecode auto-decompilation
 
-(provide 'java-decomp)
+;;; Commentary:
+
+;; This package allows automatic decompilation of Java bytecode.
+;;
+;; Decompilation can happen in two cases:
+;; (a) when opening a .class file
+;; (b) when decompressing a .class file inside a jar
+;;
+;; When `javap-mode' is available, it is automatically selected for the
+;; current bytecode-containing buffer.
+;;
+;; In any case, `javap' must be installed in the system, since this is
+;; the tool that actually performs the decompilation.
+
+;;; Code:
 
 (add-to-list 'file-name-handler-alist '("\\.class$" . java-decomp-handler))
 
@@ -57,3 +71,7 @@
                     inhibit-file-name-handlers)))
         (inhibit-file-name-operation operation))
     (apply operation args)))
+
+(provide 'java-decomp)
+
+;;; java-decomp ends here
