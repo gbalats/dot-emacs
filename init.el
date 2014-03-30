@@ -28,7 +28,6 @@
 (require 'flymake)
 (require 'flymake-cursor)
 (require 'java-decomp)
-(require 'project-root)
 (require 'use-package)
 
 
@@ -46,6 +45,7 @@
   :defer t
   :bind ("C-c c" . recompile)
   :config
+  (use-package project-root)
   (setq compilation-scroll-output 'first-error))
 
 ;; Dired
