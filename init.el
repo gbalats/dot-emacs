@@ -41,6 +41,13 @@
 ;; Builtin packages
 ;;---------------------
 
+;; Re-compile shortcut
+(use-package compile
+  :defer t
+  :bind ("C-c c" . recompile)
+  :config
+  (setq compilation-scroll-output 'first-error))
+
 ;; Dired
 (use-package find-dired
   :defer t
@@ -160,14 +167,14 @@
 
 ;; PHP mode
 (use-package php-mode
-  :mode "\\.php$")
+  :mode "\\.php\\'")
 
 ;; Groovy mode
 (use-package groovy-mode
-  :mode "\\.groovy$"
+  :mode "\\.groovy\\'"
   :interpreter "groovy")
 
 ;; LB-Datalog mode
 (use-package lb-datalog-mode
-  :mode "\\.logic$"
+  :mode "\\.logic\\'"
   :load-path "lb-datalog-mode/")

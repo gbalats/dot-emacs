@@ -12,6 +12,3 @@
 
 ;;; Since `M-<SPC>' is used by gnome, use `C-c <SPC>' instead
 (global-set-key (kbd "C-c <SPC>") 'just-one-space)
-
-;; Re-compile shortcut
-(global-set-key (kbd "C-c c") 'recompile)
