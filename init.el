@@ -144,8 +144,25 @@
   (setq reftex-plug-into-AUCTeX t)
   (setq TeX-PDF-mode t))
 
-(use-package zenburn-theme
+;; FlyMake
+(use-package flymake
+  :ensure t
+  :idle (flymake-start-syntax-check)
+  :init
+  (add-hook 'c-mode-common-hook
+            (function (lambda ()
+                        (flymake-mode 1)
+                        (local-set-key (kbd "M-n") 'flymake-goto-next-error)
+                        (local-set-key (kbd "M-p") 'flymake-goto-prev-error))))
+  (add-hook 'find-file-hook 'flymake-find-file-hook))
+
+(use-package flymake-cursor
   :ensure t)
+
+(use-package flycheck
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'flycheck-mode))
 
 ;; Transparent zenburn theme
 (use-package color-theme
@@ -166,28 +183,9 @@
   (add-hook 'window-setup-hook 'on-after-init)
   (menu-bar-mode 0))
 
-;; FlyMake
-(use-package flymake
-  :ensure t
-  :idle (flymake-start-syntax-check)
-  :init
-  (defun my:flymake-show-next-error()
-    (interactive)
-    (flymake-goto-next-error)
-    (flymake-display-err-menu-for-current-line))
-  (add-hook 'c-mode-common-hook
-            (function (lambda ()
-                        (flymake-mode 1)
-                        (local-set-key (kbd "C-c C-v")
-                                       'my:flymake-show-next-error)))))
-
-(use-package flymake-cursor
+(use-package zenburn-theme
   :ensure t)
 
-(use-package flycheck
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook 'flycheck-mode))
 
 ;;-----------------------
 ;; Major Modes
