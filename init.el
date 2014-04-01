@@ -10,18 +10,10 @@
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/")
                             ("melpa" . "http://melpa.milkbox.net/packages/")
                             ("marmalade" . "http://marmalade-repo.org/packages/")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(flymake-errline ((t (:background "brightred"))))
- '(flymake-warnline ((t (:background "brightblue")))))
 
 ;; load files
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 (add-to-list 'load-path "~/.emacs.d/use-package/")
-
 
 (require 'basic-conf)                  ; basic configuration
 (require 'java-decomp)                 ; auto-decompress Java bytecode
@@ -214,3 +206,18 @@
 (use-package lb-datalog-mode
   :mode "\\.logic\\'"
   :load-path "lb-datalog-mode/")
+
+
+;;-----------------------
+;; Custom Faces
+;;-----------------------
+
+;; TODO: remove this in the futuremas it is replicating the faces
+;; configured by zenburn, which for some reason they are not set.
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(flymake-errline ((t (:foreground "#BC8383" :underline t :weight bold))))
+ '(flymake-warnline ((t (:foreground "#DFAF8F" :underline t :weight bold)))))
