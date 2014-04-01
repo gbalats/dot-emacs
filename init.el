@@ -176,13 +176,18 @@
 
 ;; FlyMake
 (use-package flymake
-  :init (defun my:flymake-show-next-error()
-          (interactive)
-          (flymake-goto-next-error)
-          (flymake-display-err-menu-for-current-line))
-  :config (add-hook 'c-mode-common-hook 'flymake-mode)
-  :bind ("C-c C-v" . my:flymake-show-next-error)
-  :ensure t)
+  :ensure t
+  :idle (flymake-start-syntax-check)
+  :init
+  (defun my:flymake-show-next-error()
+    (interactive)
+    (flymake-goto-next-error)
+    (flymake-display-err-menu-for-current-line))
+  (add-hook 'c-mode-common-hook
+            (function (lambda ()
+                        (flymake-mode 1)
+                        (local-set-key (kbd "C-c C-v")
+                                       'my:flymake-show-next-error)))))
 
 (use-package flymake-cursor
   :ensure t)
