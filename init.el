@@ -147,11 +147,11 @@
 ;; FlyMake
 (use-package flymake
   :ensure t
-  :idle (flymake-start-syntax-check)
   :init
   (add-hook 'c-mode-common-hook
             (function (lambda ()
                         (flymake-mode 1)
+                        (run-with-idle-timer 3 nil 'flymake-start-syntax-check)
                         (local-set-key (kbd "M-n") 'flymake-goto-next-error)
                         (local-set-key (kbd "M-p") 'flymake-goto-prev-error))))
   (add-hook 'find-file-hook 'flymake-find-file-hook))
