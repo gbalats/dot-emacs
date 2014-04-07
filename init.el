@@ -115,6 +115,8 @@
 (use-package magit
   :ensure t
   :commands magit-status
+  :init (add-hook 'magit-status-mode-hook
+                  (lambda () (linum-mode -1)))
   :bind ("C-c m" . magit-status))
 
 ;; Google this
