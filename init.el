@@ -214,7 +214,7 @@
 ;; Custom Faces
 ;;-----------------------
 
-;; TODO: remove this in the futuremas it is replicating the faces
+;; TODO: remove this in the future as it is replicating the faces
 ;; configured by zenburn, which for some reason they are not set.
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
