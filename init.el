@@ -30,7 +30,7 @@
   :defer t
   :bind ("C-c c" . recompile)
   :config
-  (use-package project-root)
+  (use-package project-top)
   (setq compilation-scroll-output 'first-error))
 
 ;; Dired
