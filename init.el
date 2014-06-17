@@ -82,8 +82,6 @@
          ("C-c l" . copy-line)
          ("C-c p" . copy-paragraph)))
 
-(use-package tbemail)
-
 
 ;;-----------------------
 ;; Extra packages (dist)
@@ -189,6 +187,9 @@
   (menu-bar-mode 0))
 
 (use-package zenburn-theme
+  :ensure t)
+
+(use-package tbemail
   :ensure t)
 
 
