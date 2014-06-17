@@ -1,3 +1,11 @@
+;;; init --- Emacs Initialization
+
+;;; Commentary:
+
+;; This is used instead of the `.emacs' file for initialization.
+
+;;; Code:
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
