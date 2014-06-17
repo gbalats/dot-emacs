@@ -32,13 +32,13 @@
   "Repositions current line: once middle, twice top, thrice bottom"
   (interactive)
   (cond ((eq last-command 'centerer2)  ; 3 times pressed = bottom
-		 (recenter -1))
-		((eq last-command 'centerer1)  ; 2 times pressed = top
-		 (recenter 0)
-		 (setq this-command 'centerer2))
-		(t                             ; 1 time pressed = middle
-		 (recenter)
-		 (setq this-command 'centerer1))))
+         (recenter -1))
+        ((eq last-command 'centerer1)  ; 2 times pressed = top
+         (recenter 0)
+         (setq this-command 'centerer2))
+        (t                             ; 1 time pressed = middle
+         (recenter)
+         (setq this-command 'centerer1))))
 
 ;; c-editing tabs (change indent-tabs-mode to t, to insert tabs instead)
 (setq-default c-default-style "linux"
