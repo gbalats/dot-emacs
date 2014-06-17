@@ -204,8 +204,12 @@
 
 ;; Groovy mode
 (use-package groovy-mode
+  :ensure t
   :mode "\\.groovy\\'"
-  :interpreter "groovy")
+  :interpreter "groovy"
+  :config
+  (progn
+    (use-package inf-groovy)))
 
 ;; LB-Datalog mode
 (use-package lb-datalog-mode
