@@ -89,11 +89,6 @@
 (use-package xclip
   :disabled t)
 
-;; enable / disable easy keys (e.g., arrows)
-(use-package no-easy-keys
-  :bind ("<f5>" . no-easy-keys-minor-mode)
-  :init (no-easy-keys-minor-mode 0))
-
 ;; Copying things without selecting them
 (use-package no-selection-copy
   :bind (("C-c w" . copy-word)
@@ -118,6 +113,12 @@
   :init (add-hook 'magit-status-mode-hook
                   (lambda () (linum-mode -1)))
   :bind ("C-c m" . magit-status))
+
+;; enable / disable easy keys (e.g., arrows)
+(use-package no-easy-keys
+  :ensure t
+  :bind ("<f5>" . no-easy-keys-minor-mode)
+  :init (no-easy-keys-minor-mode 0))
 
 ;; Google this
 (use-package google-this
