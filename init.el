@@ -85,10 +85,6 @@
   (setq win-switch-idle-time 1.0)
   (setq win-switch-other-window-first nil))
 
-;; communicating with clipboard
-(use-package xclip
-  :disabled t)
-
 ;; Copying things without selecting them
 (use-package no-selection-copy
   :bind (("C-c w" . copy-word)
@@ -131,6 +127,11 @@
   :config
   (setq synonyms-file        "~/.emacs.d/thesaurus/mthesaur.txt")
   (setq synonyms-cache-file  "~/.emacs.d/thesaurus/mthesaur.txt.cache"))
+
+;; communicating with clipboard
+(use-package xclip
+  :ensure t
+  :disabled t)
 
 ;; AucTex
 (use-package tex-site
