@@ -76,15 +76,6 @@
 ;; Extra packages (user)
 ;;-----------------------
 
-;; window-switching
-(use-package win-switch
-  :commands win-switch-mode
-  :idle (win-switch-mode)
-  :config
-  (win-switch-setup-keys-ijkl "\C-xo")
-  (setq win-switch-idle-time 1.0)
-  (setq win-switch-other-window-first nil))
-
 ;; Copying things without selecting them
 (use-package no-selection-copy
   :bind (("C-c w" . copy-word)
@@ -109,6 +100,16 @@
   :init (add-hook 'magit-status-mode-hook
                   (lambda () (linum-mode -1)))
   :bind ("C-c m" . magit-status))
+
+;; window-switching
+(use-package win-switch
+  :ensure t
+  :commands win-switch-mode
+  :idle (win-switch-mode)
+  :config
+  (win-switch-setup-keys-ijkl "\C-xo")
+  (setq win-switch-idle-time 1.0)
+  (setq win-switch-other-window-first nil))
 
 ;; enable / disable easy keys (e.g., arrows)
 (use-package no-easy-keys
