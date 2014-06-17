@@ -1,3 +1,11 @@
+;;; prelude-packages --- My prelude packages
+
+;;; Commentary:
+
+;; Packages to be installed automatically.
+
+;;; Code:
+
 (require 'cl)
 (require 'package)
 
@@ -23,6 +31,7 @@
     (package-install package)))
 
 (provide 'prelude-packages)
+
 ;;; prelude-packages.el ends here
 
 ;; Local Variables:
