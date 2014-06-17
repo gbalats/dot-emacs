@@ -1,11 +1,11 @@
+;;; basic-conf --- My basic configurations
+
 ;;; Commentary:
 
 ;; Put this file into your load-path and the following into your ~/.emacs:
 ;;   (require 'basic-conf)
 
 ;;; Code:
-
-(provide 'basic-conf)
 
 ;; to display time
 (display-time)
@@ -22,14 +22,14 @@
 ;; always end a file with a newline
 (setq require-final-newline 'query)
 
-;; Centering code stolen from somewhere and restolen from 
+;; Centering code stolen from somewhere and restolen from
 ;; http://www.chrislott.org/geek/emacs/dotemacs.html
 ;; centers the screen around a line...
 (global-set-key [(control l)]  'centerer)
 
 ;; Change Ctrl+L behavior, so cool!
 (defun centerer ()
-  "Repositions current line: once middle, twice top, thrice bottom"
+  "Repositions current line: once middle, twice top, thrice bottom."
   (interactive)
   (cond ((eq last-command 'centerer2)  ; 3 times pressed = bottom
          (recenter -1))
@@ -60,7 +60,9 @@
 
 ;; my java-mode hook
 (defun my-java-mode-hook ()
+  "Personalized java mode."
     (c-set-offset 'inline-open 0))
+
 (add-hook 'java-mode-hook 'my-java-mode-hook)
 
 ;; Add color to a shell running in emacs 'M-x shell'
@@ -68,4 +70,8 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; Make shell-prompt read-only
-(setq comint-prompt-read-only t)
+(defvar comint-prompt-read-only t)
+
+(provide 'basic-conf)
+
+;;; basic-conf.el ends here

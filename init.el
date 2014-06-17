@@ -230,3 +230,5 @@
  ;; If there is more than one, they won't work right.
  '(flymake-errline ((t (:foreground "#BC8383" :underline t :weight bold))))
  '(flymake-warnline ((t (:foreground "#DFAF8F" :underline t :weight bold)))))
+
+;;; init.el ends here
