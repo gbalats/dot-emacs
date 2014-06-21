@@ -24,7 +24,7 @@
 (add-to-list 'load-path "~/.emacs.d/use-package/")
 
 (require 'basic-conf)                  ; basic configuration
-(require 'java-decomp)                 ; auto-decompress Java bytecode
+(require 'bc-disassembler)             ; auto-decompress Java bytecode
 (require 'key-bindings)                ; global keybindings
 (require 'use-package)
 
