@@ -117,7 +117,7 @@ inside a jar archive, during auto-extraction."
          (disassemble-bytecode-buffer class-file)
          (message "Disassembled %s" class-file)
          (current-buffer))))
-   ((java-decomp--alternate-handler op args)))) ;;; TODO: change name
+   ((bc-disassembler--default-handler op args))))
 
 
 (defun bc-disassembler-llvm (op &rest args)
@@ -143,26 +143,22 @@ inside a jar archive, during auto-extraction."
         (current-buffer))
       ;; (minibuffer-message "%s was automatically disassembled..." file)
       ))
-   ((llvm-decomp--alternate-handler op args)))) ;;; TODO: change name
+   ((bc-disassembler--default-handler op args))))
 
 
-(defun java-decomp--alternate-handler (operation args)
-  "Run the real handler without the javap handler installed."
+(defun bc-disassembler--default-handler (operation args)
+  "Run the real handler to avoid automatic disassembly.
+
+OPERATION is the name of the I/O primitive to be handled; ARGS
+are the arguments that were passed to that primitive."
   (let ((inhibit-file-name-handlers
          (cons 'bc-disassembler-java
-               (and (eq inhibit-file-name-operation operation)
-                    inhibit-file-name-handlers)))
+               (cons 'bc-disassembler-llvm
+                     (and (eq inhibit-file-name-operation operation)
+                          inhibit-file-name-handlers))))
         (inhibit-file-name-operation operation))
     (apply operation args)))
 
-(defun llvm-decomp--alternate-handler (operation args)
-  "Run the real handler without the javap handler installed."
-  (let ((inhibit-file-name-handlers
-         (cons 'bc-disassembler-llvm
-               (and (eq inhibit-file-name-operation operation)
-                    inhibit-file-name-handlers)))
-        (inhibit-file-name-operation operation))
-    (apply operation args)))
 
 (provide 'bc-disassembler)
 
