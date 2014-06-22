@@ -15,7 +15,9 @@ elisp.out    += $(addsuffix c,$(filter-out $(elisp.nocomp),$(elisp.out)))
 include ../common.mk
 
 
+#----------------------------------------
 # Installing Elisp files
+#----------------------------------------
 
 .PHONY: all
 all: $(elisp.out)
@@ -32,7 +34,9 @@ clean.elc:
 	rm -f $(filter %.elc,$(elisp.out))
 
 
+#----------------------------------------
 # Thesaurus Specific
+#----------------------------------------
 
 thesaurus     := $(emacs.dir)/thesaurus/mthesaur.txt
 thesaurus.url := ftp://ibiblio.org/pub/docs/books/gutenberg/etext02/mthes10.zip
@@ -47,10 +51,9 @@ $(thesaurus):
 thesaurus: $(thesaurus)
 
 
+#----------------------------------------
 # Dependencies
-
-$(addprefix $(emacs.dir)/site-lisp/, inf-groovy.elc groovy-electric.elc): \
-   $(emacs.dir)/site-lisp/groovy-mode.el
+#----------------------------------------
 
 $(emacs.dir)/use-package/use-package.elc: \
    $(emacs.dir)/use-package/bind-key.el
