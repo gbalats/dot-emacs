@@ -38,71 +38,84 @@
 ;;---------------------------------------------------------------
 
 (defun bc-disassembler-autoextract ()
-  "Disassembles a Java class-file inside a jar archive, using javap."
+  "Disassembles a Java class-file inside a jar archive, using `javap'."
   (let*
       ((components (split-string (buffer-file-name) ":"))
        (jar-file   (car components))
-       (class-file (cadr components))
-       (class-name (replace-regexp-in-string
-                         "/" "." (file-name-sans-extension class-file))))
-    (rename-buffer (concat class-name
-                           " (" (file-name-nondirectory jar-file) ")"))
+       (class-file (cadr components)))
+
+    ;; Erase previous contents
     (erase-buffer)
-    (generate-bytecode-buffer class-file jar-file t)
+
+    ;; Now disassemble bytecode inside empty buffer
+    (disassemble-bytecode-buffer class-file jar-file)
+
+    ;; Display some info on what just happened
     (message "Disassembled %s" class-file)))
+
+
+;;------------------------------
+;; Java Bytecode Disassembly
+;;------------------------------
+
+(defun disassemble-bytecode-buffer (class-file &optional jar-file)
+  "Disassembles a Java CLASS-FILE inside the current buffer, using `javap'.
+
+The JAR-FILE argument is non-nil if the disassembly is happening
+inside a jar archive, during auto-extraction."
+
+  (let* ((inside-jar-p (not (eq jar-file nil)))
+         (dirname      (file-name-directory class-file))
+         (filename     (file-name-nondirectory class-file))
+         (classname    (file-name-sans-extension filename))
+         (classpath    dirname))
+
+    ;; fully qualify class name if inside jar; adjust classpath as
+    ;; well
+    (when inside-jar-p
+      (setq classpath jar-file)
+      (setq classname (replace-regexp-in-string
+                       "/" "." (file-name-sans-extension class-file)))
+      (rename-buffer (concat classname
+                           " (" (file-name-nondirectory jar-file) ")")))
+
+    ;; Disassemble .class file
+    (call-process "javap" nil t nil "-private" "-verbose"
+                  "-classpath" classpath classname)
+
+    ;; Set buffer's filename
+    (setq buffer-file-name
+          (if inside-jar-p (concat jar-file ":" class-file) class-file))
+
+    ;; Set read-only mode for this buffer
+    (setq buffer-read-only t)
+
+    ;; Mark the buffer as unmodified
+    (set-buffer-modified-p nil)
+
+    ;; Jump to the beginning of the buffer
+    (goto-char (point-min))
+
+    ;; Switch to `javap-mode'
+    (when (fboundp 'javap-mode)
+      (javap-mode))))
 
 
 ;;------------------------------
 ;; Java and LLVM handlers
 ;;------------------------------
 
-(defun generate-bytecode-buffer (class-file &optional classpath inside-jar-p)
-  "Disassembles a Java CLASS-FILE inside a buffer, using `javap'.
-
-The CLASSPATH argument can be used to determine where to search
-for class-files.  The newly generated buffer is returned."
-  (let* ((dirname     (file-name-directory class-file))
-         (filename    (file-name-nondirectory class-file))
-         (classname   (file-name-sans-extension filename))
-         (buffer      (if inside-jar-p (current-buffer)
-                        (generate-new-buffer filename))))
-
-    ;; fully qualify class name if inside jar
-    (when inside-jar-p
-      (setq classname (replace-regexp-in-string
-                       "/" "." (file-name-sans-extension class-file))))
-
-    ;; create buffer to hold disassembled Java bytecode
-    (with-current-buffer buffer
-      ;; Disassemble .class file
-      (call-process "javap" nil t nil "-private" "-verbose"
-                    "-classpath" (if classpath classpath dirname) classname)
-
-      ;; Set buffer's filename
-      (setq buffer-file-name class-file)
-
-      ;; Set read-only mode for this buffer
-      (setq buffer-read-only t)
-
-      ;; Mark the buffer as unmodified
-      (set-buffer-modified-p nil)
-
-      ;; Jump to the beginning of the buffer
-      (goto-char (point-min))
-
-      ;; Switch to `javap-mode'
-      (when (fboundp 'javap-mode)
-        (javap-mode))
-
-      (current-buffer))))
-
 (defun bc-disassembler-java (op &rest args)
-  "Handle .class files by putting the output of javap in the buffer."
+  "Handle .class files by putting the output of `javap' in the buffer."
   (cond
    ((eq op 'get-file-buffer)
      (let* ((class-file (car args))
             (buffer-name (file-name-nondirectory class-file)))
-       (generate-bytecode-buffer class-file)))
+       ;; Create new buffer to hold the output of `javap'
+       (with-current-buffer (generate-new-buffer buffer-name)
+         (disassemble-bytecode-buffer class-file)
+         (message "Disassembled %s" class-file)
+         (current-buffer))))
    ((java-decomp--alternate-handler op args)))) ;;; TODO: change name
 
 
