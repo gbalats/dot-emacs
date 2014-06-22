@@ -22,6 +22,7 @@
 ;; load files
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 (add-to-list 'load-path "~/.emacs.d/use-package/")
+(add-to-list 'load-path "~/.emacs.d/llvm/")
 
 (require 'basic-conf)                  ; basic configuration
 (require 'bc-disassembler)             ; auto-decompress Java bytecode
@@ -223,6 +224,11 @@
 (use-package lb-datalog-mode
   :mode "\\.logic\\'"
   :load-path "lb-datalog-mode/")
+
+;; LLVM mode
+(use-package llvm-mode
+  :mode "\\.ll\\'"
+  :load-path "llvm/")
 
 
 ;;-----------------------

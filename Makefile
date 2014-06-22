@@ -5,6 +5,7 @@ elisp.src := init.el
 elisp.src += $(wildcard site-lisp/*.el)
 elisp.src += $(wildcard lb-datalog-mode/*.el)
 elisp.src += $(addprefix use-package/, use-package.el bind-key.el)
+elisp.src += $(addprefix llvm/, emacs.el llvm-mode.el tablegen-mode.el)
 elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))
 emacs.lib := $(addprefix -L $(emacs.dir)/,site-lisp use-package)
 
@@ -13,6 +14,24 @@ elisp.nocomp := $(addprefix $(emacs.dir)/, init.el site-lisp/setup-theme.el)
 elisp.out    += $(addsuffix c,$(filter-out $(elisp.nocomp),$(elisp.out)))
 
 include ../common.mk
+
+
+# Placeholder
+all:
+
+
+#----------------------------------------
+# LLVM Emacs Extensions
+#----------------------------------------
+
+elisp.llvm_url := http://llvm.org/svn/llvm-project/llvm/trunk/utils/emacs/
+
+# Create llvm directory
+llvm:
+	wget -P llvm -r --no-parent -nd -A.el -e robots=off $(elisp.llvm_url)
+
+# Download emacs-llvm sources before compiling
+$(elisp.out): | llvm
 
 
 #----------------------------------------
