@@ -29,7 +29,8 @@
 ;; Add hook for automatically disassembling .class files inside jars
 (add-hook 'archive-extract-hooks
           (lambda ()
-            (cond ((string-match "\\.class$" (buffer-file-name))
+            (cond ((and (executable-find "javap")
+                        (string-match "\\.class$" (buffer-file-name)))
                    (bc-disassembler-autoextract)))))
 
 
@@ -108,7 +109,7 @@ inside a jar archive, during auto-extraction."
 (defun bc-disassembler-java (op &rest args)
   "Handle .class files by putting the output of `javap' in the buffer."
   (cond
-   ((eq op 'get-file-buffer)
+   ((and (eq op 'get-file-buffer) (executable-find "javap"))
      (let* ((class-file (car args))
             (buffer-name (file-name-nondirectory class-file)))
        ;; Create new buffer to hold the output of `javap'
@@ -122,7 +123,7 @@ inside a jar archive, during auto-extraction."
 (defun bc-disassembler-llvm (op &rest args)
   "Handle .bc files by putting the output of llvm-dis in the buffer."
   (cond
-   ((eq op 'get-file-buffer)
+   ((and (eq op 'get-file-buffer) (executable-find "llvm-dis"))
     (let* ((file (car args))
            (filename (file-name-nondirectory file))
            (basename (file-name-sans-extension filename))
