@@ -5,6 +5,7 @@ elisp.src := init.el
 elisp.src += $(wildcard site-lisp/*.el)
 elisp.src += $(wildcard lb-datalog-mode/*.el)
 elisp.src += $(wildcard autodisass-java-bytecode/*.el)
+elisp.src += $(wildcard autodisass-llvm-bitcode/*.el)
 elisp.src += $(addprefix use-package/, use-package.el bind-key.el)
 elisp.src += $(addprefix llvm/, emacs.el llvm-mode.el tablegen-mode.el)
 elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))

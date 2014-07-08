@@ -23,10 +23,12 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 (add-to-list 'load-path "~/.emacs.d/use-package/")
 (add-to-list 'load-path "~/.emacs.d/autodisass-java-bytecode/")
+(add-to-list 'load-path "~/.emacs.d/autodisass-llvm-bitcode/")
 (add-to-list 'load-path "~/.emacs.d/llvm/")
 
 (require 'basic-conf)                 ; basic configuration
 (require 'autodisass-java-bytecode)   ; auto-disassemble Java bytecode
+(require 'autodisass-llvm-bitcode)    ; auto-disassemble LLVM bitcode
 (require 'key-bindings)               ; global keybindings
 (require 'use-package)
 
