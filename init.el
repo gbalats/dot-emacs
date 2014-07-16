@@ -29,8 +29,18 @@
 (require 'basic-conf)                 ; basic configuration
 (require 'autodisass-java-bytecode)   ; auto-disassemble Java bytecode
 (require 'autodisass-llvm-bitcode)    ; auto-disassemble LLVM bitcode
-(require 'key-bindings)               ; global keybindings
 (require 'use-package)
+
+
+;;---------------------
+;; Global keybindings
+;;---------------------
+
+;; set the keybinding so that you can use f4 for goto line
+(global-set-key [f4] 'goto-line)
+
+;;; Since `M-<SPC>' is used by gnome, use `C-c <SPC>' instead
+(global-set-key (kbd "C-c <SPC>") 'just-one-space)
 
 
 ;;---------------------
