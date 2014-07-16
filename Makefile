@@ -13,7 +13,7 @@ elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))
 emacs.lib := $(addprefix -L $(emacs.dir)/,site-lisp use-package)
 
 # Compiled files
-elisp.nocomp := $(addprefix $(emacs.dir)/, init.el site-lisp/setup-theme.el)
+elisp.nocomp := $(addprefix $(emacs.dir)/, init.el)
 elisp.out    += $(addsuffix c,$(filter-out $(elisp.nocomp),$(elisp.out)))
 
 
