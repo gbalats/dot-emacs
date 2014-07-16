@@ -1,3 +1,4 @@
+INSTALL   := install
 EMACS     := emacs --batch
 
 emacs.dir := $(HOME)/.emacs.d
@@ -14,8 +15,6 @@ emacs.lib := $(addprefix -L $(emacs.dir)/,site-lisp use-package)
 # Compiled files
 elisp.nocomp := $(addprefix $(emacs.dir)/, init.el site-lisp/setup-theme.el)
 elisp.out    += $(addsuffix c,$(filter-out $(elisp.nocomp),$(elisp.out)))
-
-include ../common.mk
 
 
 # Placeholder

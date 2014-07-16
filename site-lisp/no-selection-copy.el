@@ -4,7 +4,8 @@
 
 ;; This package provides copy without selection functionality and is
 ;; based on:
-;;    http://www.emacswiki.org/emacs/CopyWithoutSelection
+;;
+;; http://www.emacswiki.org/emacs/CopyWithoutSelection
 
 ;;; Code:
 
