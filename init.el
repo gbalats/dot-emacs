@@ -6,6 +6,11 @@
 
 ;;; Code:
 
+
+;;-------------------------
+;; Custom Variables
+;;-------------------------
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -39,7 +44,7 @@
            ("marmalade" . "http://marmalade-repo.org/packages/")))))
 
 
-;; load files
+;; specify some additional load paths
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 (add-to-list 'load-path "~/.emacs.d/use-package/")
 (add-to-list 'load-path "~/.emacs.d/autodisass-java-bytecode/")
@@ -112,7 +117,12 @@
 ;; Open shell with <f3>
 (use-package shell
   :defer t
-  :bind ("<f3>" . shell))
+  :bind ("<f3>" . shell)
+  :config
+  (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+  (add-hook 'shell-mode-hook
+            'ansi-color-for-comint-mode-on) ; add color to shell
+  (setq comint-prompt-read-only t))         ; make shell-prompt read-only
 
 ;; Electric pairs
 (use-package electric
