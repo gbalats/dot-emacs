@@ -67,6 +67,23 @@
 (global-set-key (kbd "C-a") 'back-to-indentation)
 (global-set-key (kbd "M-m") 'move-beginning-of-line)
 
+;; centers the screen around a line with C-l
+(global-set-key [(control l)]  'centerer)
+
+;; Centering code stolen from somewhere and restolen from
+;; http://www.chrislott.org/geek/emacs/dotemacs.html
+(defun centerer ()
+  "Repositions current line: once middle, twice top, thrice bottom."
+  (interactive)
+  (cond ((eq last-command 'centerer2)  ; 3 times pressed = bottom
+         (recenter -1))
+        ((eq last-command 'centerer1)  ; 2 times pressed = top
+         (recenter 0)
+         (setq this-command 'centerer2))
+        (t                             ; 1 time pressed = middle
+         (recenter)
+         (setq this-command 'centerer1))))
+
 
 
 ;;---------------------
