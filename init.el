@@ -278,6 +278,14 @@
 ;; Major Modes (server)
 ;;-------------------------
 
+;; C, C++, Java modes
+(use-package cc-mode
+  :init
+  ;; Java hook
+  (defun my-java-mode-hook ()
+    "Personalized java mode."
+    (c-set-offset 'inline-open 0))
+  (add-hook 'java-mode-hook 'my-java-mode-hook))
 
 ;; PHP mode
 (use-package php-mode
