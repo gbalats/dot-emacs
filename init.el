@@ -11,7 +11,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(require-final-newline (quote query))
+ '(require-final-newline (quote query)) ; require newline at EOF
  ;; set some C coding style variables
  '(c-default-style (quote ((java-mode . "java")
                            (awk-mode . "awk")
@@ -33,9 +33,11 @@
  '(delete-selection-mode t)             ; delete active region
  '(column-number-mode t)                ; show column number
  ;; configure package repositories
- '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/")
-                            ("melpa" . "http://melpa.milkbox.net/packages/")
-                            ("marmalade" . "http://marmalade-repo.org/packages/")))))
+ '(package-archives
+   (quote (("gnu" . "http://elpa.gnu.org/packages/")
+           ("melpa" . "http://melpa.milkbox.net/packages/")
+           ("marmalade" . "http://marmalade-repo.org/packages/")))))
+
 
 ;; load files
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
