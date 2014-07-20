@@ -10,18 +10,6 @@
 ;; to display time
 (display-time)
 
-;; to change the default tab size
-(setq tab-width 4)
-
-;; to stop making backup files
-(setq make-backup-files nil)
-
-;; disable auto-save
-(setq auto-save-default nil)
-
-;; always end a file with a newline
-(setq require-final-newline 'query)
-
 ;; Centering code stolen from somewhere and restolen from
 ;; http://www.chrislott.org/geek/emacs/dotemacs.html
 ;; centers the screen around a line...
@@ -39,17 +27,6 @@
         (t                             ; 1 time pressed = middle
          (recenter)
          (setq this-command 'centerer1))))
-
-;; c-editing tabs (change indent-tabs-mode to t, to insert tabs instead)
-(setq-default c-default-style "linux"
-              c-basic-offset 4
-              tab-width 4
-              tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80)
-              indent-tabs-mode nil)
-
-;; swap C-a with M-m
-(global-set-key (kbd "C-a") 'back-to-indentation)
-(global-set-key (kbd "M-m") 'move-beginning-of-line)
 
 ;; set line numbering by default
 (global-linum-mode 1)

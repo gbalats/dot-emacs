@@ -11,8 +11,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(require-final-newline (quote query))
+ '(c-default-style (quote ((java-mode . "java")
+                           (awk-mode . "awk")
+                           (other . "linux"))))
  '(c-report-syntactic-errors t)
  '(c-backspace-function (quote delete-backward-char))
+ '(c-basic-offset 4)
+ '(tab-width 4)
+ '(tab-stop-list (number-sequence 4 80 4))
+ '(indent-tabs-mode nil)
+ '(auto-save-default nil)
+ '(make-backup-files nil)
  '(inhibit-startup-screen t)
  '(haskell-mode-hook (quote (turn-on-haskell-indent)))
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/")
@@ -42,6 +52,11 @@
 
 ;;; Since `M-<SPC>' is used by gnome, use `C-c <SPC>' instead
 (global-set-key (kbd "C-c <SPC>") 'just-one-space)
+
+;; swap C-a with M-m
+(global-set-key (kbd "C-a") 'back-to-indentation)
+(global-set-key (kbd "M-m") 'move-beginning-of-line)
+
 
 
 ;;---------------------
