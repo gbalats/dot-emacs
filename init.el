@@ -57,17 +57,17 @@
 ;;-------------------------
 
 
-;; set the keybinding so that you can use f4 for goto line
+;; set the keybinding so that you can use `f4' for goto line
 (global-set-key [f4] 'goto-line)
 
 ;;; Since `M-<SPC>' is used by gnome, use `C-c <SPC>' instead
 (global-set-key (kbd "C-c <SPC>") 'just-one-space)
 
-;; swap C-a with M-m
+;; swap `C-a' with `M-m'
 (global-set-key (kbd "C-a") 'back-to-indentation)
 (global-set-key (kbd "M-m") 'move-beginning-of-line)
 
-;; centers the screen around a line with C-l
+;; centers the screen around a line with `C-l'
 (global-set-key [(control l)]  'centerer)
 
 ;; Centering code stolen from somewhere and restolen from
