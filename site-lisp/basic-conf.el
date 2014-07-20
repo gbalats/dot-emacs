@@ -10,24 +10,6 @@
 ;; to display time
 (display-time)
 
-;; Centering code stolen from somewhere and restolen from
-;; http://www.chrislott.org/geek/emacs/dotemacs.html
-;; centers the screen around a line...
-(global-set-key [(control l)]  'centerer)
-
-;; Change Ctrl+L behavior, so cool!
-(defun centerer ()
-  "Repositions current line: once middle, twice top, thrice bottom."
-  (interactive)
-  (cond ((eq last-command 'centerer2)  ; 3 times pressed = bottom
-         (recenter -1))
-        ((eq last-command 'centerer1)  ; 2 times pressed = top
-         (recenter 0)
-         (setq this-command 'centerer2))
-        (t                             ; 1 time pressed = middle
-         (recenter)
-         (setq this-command 'centerer1))))
-
 ;; my java-mode hook
 (defun my-java-mode-hook ()
   "Personalized java mode."
