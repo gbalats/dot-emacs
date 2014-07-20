@@ -12,19 +12,27 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(require-final-newline (quote query))
+ ;; set some C coding style variables
  '(c-default-style (quote ((java-mode . "java")
                            (awk-mode . "awk")
                            (other . "linux"))))
  '(c-report-syntactic-errors t)
  '(c-backspace-function (quote delete-backward-char))
  '(c-basic-offset 4)
+ ;; set some haskell coding style variables
+ '(haskell-mode-hook (quote (turn-on-haskell-indent)))
+ ;; configure tab behavior
  '(tab-width 4)
  '(tab-stop-list (number-sequence 4 80 4))
  '(indent-tabs-mode nil)
- '(auto-save-default nil)
- '(make-backup-files nil)
- '(inhibit-startup-screen t)
- '(haskell-mode-hook (quote (turn-on-haskell-indent)))
+ ;; other options
+ '(auto-save-default nil)               ; no auto-save
+ '(make-backup-files nil)               ; no backup files
+ '(global-linum-mode t)                 ; line numbering by default
+ '(inhibit-startup-screen t)            ; no startup screen
+ '(delete-selection-mode t)             ; delete active region
+ '(column-number-mode t)                ; show column number
+ ;; configure package repositories
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/")
                             ("melpa" . "http://melpa.milkbox.net/packages/")
                             ("marmalade" . "http://marmalade-repo.org/packages/")))))
