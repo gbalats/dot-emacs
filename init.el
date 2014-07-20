@@ -37,6 +37,7 @@
  '(inhibit-startup-screen t)            ; no startup screen
  '(delete-selection-mode t)             ; delete active region
  '(column-number-mode t)                ; show column number
+ '(show-paren-mode t)                   ; show matching parentheses
  ;; configure package repositories
  '(package-archives
    (quote (("gnu" . "http://elpa.gnu.org/packages/")
@@ -278,7 +279,7 @@
 ;; Major Modes (server)
 ;;-------------------------
 
-;; C, C++, Java modes
+;; C/C++ and Java modes
 (use-package cc-mode
   :init
   ;; Java hook
