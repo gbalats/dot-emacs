@@ -32,9 +32,10 @@
 (require 'use-package)
 
 
-;;---------------------
+;;-------------------------
 ;; Global keybindings
-;;---------------------
+;;-------------------------
+
 
 ;; set the keybinding so that you can use f4 for goto line
 (global-set-key [f4] 'goto-line)
@@ -46,6 +47,7 @@
 ;;---------------------
 ;; Builtin packages
 ;;---------------------
+
 
 ;; Re-compile shortcut
 (use-package compile
@@ -94,20 +96,11 @@
 (use-package cedet)
 
 
-;;-----------------------
-;; Extra packages (user)
-;;-----------------------
 
-;; Copying things without selecting them
-(use-package no-selection-copy
-  :bind (("C-c w" . copy-word)
-         ("C-c l" . copy-line)
-         ("C-c p" . copy-paragraph)))
+;;-------------------------
+;; Extra packages (server)
+;;-------------------------
 
-
-;;-----------------------
-;; Extra packages (dist)
-;;-----------------------
 
 (use-package package
   :config
@@ -215,9 +208,24 @@
   :ensure t)
 
 
-;;-----------------------
-;; Major Modes
-;;-----------------------
+
+;;-------------------------
+;; Extra packages (local)
+;;-------------------------
+
+
+;; Copying things without selecting them
+(use-package no-selection-copy
+  :bind (("C-c w" . copy-word)
+         ("C-c l" . copy-line)
+         ("C-c p" . copy-paragraph)))
+
+
+
+;;-------------------------
+;; Major Modes (server)
+;;-------------------------
+
 
 ;; PHP mode
 (use-package php-mode
@@ -233,6 +241,13 @@
   (progn
     (use-package inf-groovy)))
 
+
+
+;;-------------------------
+;; Major Modes (local)
+;;-------------------------
+
+
 ;; LB-Datalog mode
 (use-package lb-datalog-mode
   :mode "\\.logic\\'"
@@ -244,9 +259,11 @@
   :load-path "llvm/")
 
 
-;;-----------------------
+
+;;-------------------------
 ;; Custom Faces
-;;-----------------------
+;;-------------------------
+
 
 ;; TODO: remove this in the future as it is replicating the faces
 ;; configured by zenburn, which for some reason they are not set.
