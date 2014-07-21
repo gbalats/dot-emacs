@@ -60,12 +60,16 @@ clean.elc:
 
 thesaurus     := $(emacs.dir)/thesaurus/mthesaur.txt
 thesaurus.url := ftp://ibiblio.org/pub/docs/books/gutenberg/etext02/mthes10.zip
+thesaurus.zip := /tmp/mthesaur.zip
 
-$(thesaurus):
-	@echo "... [elisp] downloading thesaurus ..."
-	@wget $(thesaurus.url) -O mthesaur.zip
-	@unzip mthesaur.zip -d $(@D)
-	@rm mthesaur.zip
+.INTERMEDIATE: $(thesaurus.zip)
+$(thesaurus.zip):
+	$(info ... [elisp] downloading thesaurus ...)
+	wget -q $(thesaurus.url) -O /tmp/mthesaur.zip
+
+export UNZIP := -qq
+$(thesaurus): $(thesaurus.zip)
+	unzip -u $< -d $(@D)
 
 .PHONY: thesaurus
 thesaurus: $(thesaurus)
