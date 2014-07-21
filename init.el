@@ -46,11 +46,8 @@
 
 
 ;; specify some additional load paths
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
-(add-to-list 'load-path "~/.emacs.d/use-package/")
-(add-to-list 'load-path "~/.emacs.d/autodisass-java-bytecode/")
-(add-to-list 'load-path "~/.emacs.d/autodisass-llvm-bitcode/")
-(add-to-list 'load-path "~/.emacs.d/llvm/")
+(let ((default-directory "~/.emacs.d/site-lisp/"))
+  (normal-top-level-add-subdirs-to-load-path))
 
 (require 'autodisass-java-bytecode)   ; auto-disassemble Java bytecode
 (require 'autodisass-llvm-bitcode)    ; auto-disassemble LLVM bitcode

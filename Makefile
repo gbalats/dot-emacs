@@ -1,21 +1,23 @@
-INSTALL   := install
 EMACS     := emacs --batch
+INSTALL   := install
 WGET      := wget -q
 
 emacs.dir := $(HOME)/.emacs.d
+elisp.dir := $(emacs.dir)/site-lisp
 elisp.src := init.el
-elisp.src += $(wildcard site-lisp/*.el)
-elisp.src += $(wildcard lb-datalog-mode/*.el)
-elisp.src += $(wildcard autodisass-java-bytecode/*.el)
-elisp.src += $(wildcard autodisass-llvm-bitcode/*.el)
-elisp.src += $(addprefix use-package/, use-package.el bind-key.el)
-elisp.src += $(addprefix llvm/, emacs.el llvm-mode.el tablegen-mode.el)
+
+# Add various elisp Modules
+elisp.src += $(wildcard  site-lisp/etc/*.el)
+elisp.src += $(wildcard  site-lisp/autodisass-java-bytecode/*.el)
+elisp.src += $(wildcard  site-lisp/autodisass-llvm-bitcode/*.el)
+elisp.src += $(wildcard  site-lisp/lb-datalog-mode/*.el)
+elisp.src += $(addprefix site-lisp/llvm/,emacs.el llvm-mode.el tablegen-mode.el)
+elisp.src += $(addprefix site-lisp/use-package/, use-package.el bind-key.el)
 elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))
-emacs.lib := $(addprefix -L $(emacs.dir)/,site-lisp use-package)
+elisp.lib := $(addprefix -L $(elisp.dir)/,etc use-package)
 
 # Compiled files
-elisp.nocomp := $(addprefix $(emacs.dir)/, init.el)
-elisp.out    += $(addsuffix c,$(filter-out $(elisp.nocomp),$(elisp.out)))
+elisp.out += $(addsuffix c,$(filter-out $(emacs.dir)/init.el,$(elisp.out)))
 
 
 # Placeholder
@@ -26,14 +28,18 @@ all:
 # LLVM Emacs Extensions
 #----------------------------------------
 
+llvm.dir := site-lisp/llvm
 llvm.url := http://llvm.org/svn/llvm-project/llvm/trunk/utils/emacs/
 
 # Create llvm directory
-llvm:
-	$(WGET) -P llvm -r --no-parent -nd -A.el -e robots=off $(llvm.url)
+$(llvm.dir):
+	$(WGET) -P $@ -r --no-parent -nd -A.el -e robots=off $(llvm.url)
 
 # Download emacs-llvm sources before compiling
-$(elisp.out): | llvm
+$(elisp.out): | $(llvm.dir)
+
+.PHONY: llvm
+llvm: $(llvm.dir)
 
 
 #----------------------------------------
@@ -48,7 +54,7 @@ $(emacs.dir)/%.el: %.el
 	$(INSTALL) -m 444 -D $< $@
 
 $(filter %.elc,$(elisp.out)): %.elc: %.el
-	$(EMACS) $(emacs.lib) -f batch-byte-compile $<
+	$(EMACS) $(elisp.lib) -f batch-byte-compile $<
 
 .PHONY: clean
 clean:
@@ -84,5 +90,6 @@ thesaurus: $(thesaurus)
 # Dependencies
 #----------------------------------------
 
-$(emacs.dir)/use-package/use-package.elc: \
-   $(emacs.dir)/use-package/bind-key.el
+use-package.dir := $(elisp.dir)/use-package
+
+$(use-package.dir)/use-package.elc: $(use-package.dir)/bind-key.el
