@@ -1,5 +1,6 @@
 INSTALL   := install
 EMACS     := emacs --batch
+WGET      := wget -q
 
 emacs.dir := $(HOME)/.emacs.d
 elisp.src := init.el
@@ -25,11 +26,11 @@ all:
 # LLVM Emacs Extensions
 #----------------------------------------
 
-elisp.llvm_url := http://llvm.org/svn/llvm-project/llvm/trunk/utils/emacs/
+llvm.url := http://llvm.org/svn/llvm-project/llvm/trunk/utils/emacs/
 
 # Create llvm directory
 llvm:
-	wget -P llvm -r --no-parent -nd -A.el -e robots=off $(elisp.llvm_url)
+	$(WGET) -P llvm -r --no-parent -nd -A.el -e robots=off $(llvm.url)
 
 # Download emacs-llvm sources before compiling
 $(elisp.out): | llvm
@@ -43,11 +44,15 @@ $(elisp.out): | llvm
 all: $(elisp.out)
 
 $(emacs.dir)/%.el: %.el
-	@echo "... [elisp] installing $* ..."
+	$(info ... [elisp] installing $* ...)
 	$(INSTALL) -m 444 -D $< $@
 
 $(filter %.elc,$(elisp.out)): %.elc: %.el
 	$(EMACS) $(emacs.lib) -f batch-byte-compile $<
+
+.PHONY: clean
+clean:
+	rm -f $(elisp.out)
 
 .PHONY: clean.elc
 clean.elc:
@@ -65,7 +70,7 @@ thesaurus.zip := /tmp/mthesaur.zip
 .INTERMEDIATE: $(thesaurus.zip)
 $(thesaurus.zip):
 	$(info ... [elisp] downloading thesaurus ...)
-	wget -q $(thesaurus.url) -O /tmp/mthesaur.zip
+	$(WGET) $(thesaurus.url) -O /tmp/mthesaur.zip
 
 export UNZIP := -qq
 $(thesaurus): $(thesaurus.zip)
