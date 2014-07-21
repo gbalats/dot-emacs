@@ -23,7 +23,7 @@ Post-installation
 
 The first time that emacs is executed (after installation via `make`),
 it will automatically download a list of modules from the repositories
-listed in the *init*. (This, however, requires the *package-system*
+listed in the *init* file. (This, however, requires the package-system
 available for emacs versions &ge; 24.)
 
 The list of modules that will be downloaded consist of:
