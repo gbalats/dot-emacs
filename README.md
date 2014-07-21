@@ -3,15 +3,15 @@ dot-emacs
 
 This is my emacs configuration. It contains:
 
-1. [the init file](/init.el)
-2. some git submodules under [site-lisp/](/site-lisp/)
-3. some additional local packages under [site-lisp/etc](/site-lisp/etc/).
+1. the *init* file
+2. some git submodules under `site-lisp/`
+3. some additional local packages under `site-lisp/etc`.
 
 
 Installation
 ------------
 
-To install *everything* just run the following commands:
+To install everything just run the following commands:
 
     git submodule init
     git submodule update
@@ -23,8 +23,8 @@ Post-installation
 
 The first time that emacs is executed (after installation via `make`),
 it will automatically download a list of modules from the repositories
-listed in [the init file](/init.el). (This, however, requires the
-package-system available for emacs versions &ge; 24.)
+listed in the *init*. (This, however, requires the *package-system*
+available for emacs versions &ge; 24.)
 
 The list of modules that will be downloaded consist of:
 
