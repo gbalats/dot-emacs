@@ -270,6 +270,10 @@
   :ensure t
   :bind ("C-c e" . er/expand-region))
 
+(use-package god-mode
+  :ensure t
+  :bind ("C-c g" . god-local-mode))
+
 
 
 ;;-------------------------
