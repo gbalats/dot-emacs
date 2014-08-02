@@ -10,12 +10,10 @@
 (require 'package)
 
 (defconst prelude-packages
-  '(auctex clojure-mode coffee-mode deft expand-region
-           gist groovy-mode haskell-mode magit javap-mode
-           markdown-mode paredit projectile python color-theme
-           rainbow-mode solarized-theme zenburn-theme
-           volatile-highlights yaml-mode yari auto-complete
-           ac-dabbrev synonyms)
+  '(auctex clojure-mode coffee-mode groovy-mode haskell-mode
+           markdown-mode javap-mode deft gist paredit projectile
+           python rainbow-mode solarized-theme auto-complete ac-dabbrev
+           color-theme zenburn-theme volatile-highlights yaml-mode yari)
   "A list of packages to ensure are installed at launch.")
 
 ;; activate all the packages (in particular autoloads)

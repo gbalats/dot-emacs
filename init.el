@@ -266,6 +266,10 @@
 (use-package tbemail
   :ensure t)
 
+(use-package expand-region
+  :ensure t
+  :bind ("C-c e" . er/expand-region))
+
 
 
 ;;-------------------------
