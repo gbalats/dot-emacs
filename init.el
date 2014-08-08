@@ -275,6 +275,32 @@
   :bind ("C-c g" . god-local-mode))
 
 
+;; Auto-complete
+(use-package auto-complete
+  :ensure t
+  :config
+  ;; add to dictionary directories
+  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+  ;; default configuration for auto-complete
+  (require 'auto-complete-config)
+  (ac-config-default)
+  ;; include C headers
+  (defun my:ac-c-header-init ()
+    (require 'auto-complete-c-headers)
+    (add-to-list 'ac-sources 'ac-source-c-headers)
+    (add-to-list 'achead:include-directories '"/usr/include"))
+  ;; call this function from c/c++ hooks
+  (add-hook 'c++-mode-hook 'my:ac-c-header-init)
+  (add-hook 'c-mode-hook 'my:ac-c-header-init))
+
+
+;; YASnippet Programming Templates
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode 1))
+
+
 
 ;;-------------------------
 ;; Extra packages (local)
