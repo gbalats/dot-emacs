@@ -12,8 +12,9 @@
 (defconst prelude-packages
   '(auctex clojure-mode coffee-mode groovy-mode haskell-mode
            markdown-mode javap-mode deft gist paredit projectile
-           python rainbow-mode solarized-theme auto-complete ac-dabbrev
-           color-theme zenburn-theme volatile-highlights yaml-mode yari)
+           rainbow-mode solarized-theme color-theme zenburn-theme
+           auto-complete auto-complete-c-headers ac-dabbrev
+           python volatile-highlights yaml-mode yari)
   "A list of packages to ensure are installed at launch.")
 
 ;; activate all the packages (in particular autoloads)
