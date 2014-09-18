@@ -50,8 +50,8 @@
            ("marmalade" . "http://marmalade-repo.org/packages/")))))
 
 
-;; load CEDET (dev version)
-(load-file (concat user-emacs-directory "site-lisp/etc/cedet-setup.el"))
+;; uncomment the following line to load CEDET (dev version)
+;; (load-file (concat user-emacs-directory "site-lisp/etc/cedet-setup.el"))
 
 ;; specify some additional load paths
 (let ((default-directory "~/.emacs.d/site-lisp/"))
