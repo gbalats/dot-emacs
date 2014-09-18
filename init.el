@@ -106,10 +106,11 @@
 
 ;; CEDET (dev)
 (use-package cedet-devel-load
-  :load-path "~/.emacs.d/cedet-latest/"
+  :load-path "~/.emacs.d/site-lisp/cedet/"
+  :disabled t
   :config
   ;; Add subdirectory to load path
-  (add-to-list 'load-path (concat user-emacs-directory "cedet-latest/contrib"))
+  (add-to-list 'load-path (concat user-emacs-directory "site-lisp/cedet/contrib"))
 
   ;; Require the following packages
   (require 'semantic/ia)

@@ -16,4 +16,4 @@
 	branch = master
 [submodule "site-lisp/cedet"]
 	path = site-lisp/cedet
-	url = git@github.com:emacsmirror/cedet.git
+	url = git@github.com:gbalats/cedet.git
