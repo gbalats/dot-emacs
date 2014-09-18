@@ -38,6 +38,11 @@
  '(delete-selection-mode t)             ; delete active region
  '(column-number-mode t)                ; show column number
  '(show-paren-mode t)                   ; show matching parentheses
+ ;; configure org-mode file applications
+ '(org-file-apps (quote ((auto-mode . emacs)
+                         ("\\.mm\\'" . default)
+                         ("\\.x?html?\\'" . default)
+                         ("\\.pdf\\'" . "evince %s"))))
  ;; configure package repositories
  '(package-archives
    (quote (("gnu" . "http://elpa.gnu.org/packages/")
