@@ -38,6 +38,11 @@
  '(delete-selection-mode t)             ; delete active region
  '(column-number-mode t)                ; show column number
  '(show-paren-mode t)                   ; show matching parentheses
+ ;; configure org-mode file applications
+ '(org-file-apps (quote ((auto-mode . emacs)
+                         ("\\.mm\\'" . default)
+                         ("\\.x?html?\\'" . default)
+                         ("\\.pdf\\'" . "evince %s"))))
  ;; configure package repositories
  '(package-archives
    (quote (("gnu" . "http://elpa.gnu.org/packages/")
@@ -45,9 +50,13 @@
            ("marmalade" . "http://marmalade-repo.org/packages/")))))
 
 
+;; load CEDET (dev version)
+(load-file (concat user-emacs-directory "site-lisp/etc/cedet-setup.el"))
+
 ;; specify some additional load paths
 (let ((default-directory "~/.emacs.d/site-lisp/"))
   (normal-top-level-add-subdirs-to-load-path))
+
 
 (require 'autodisass-java-bytecode)   ; auto-disassemble Java bytecode
 (require 'autodisass-llvm-bitcode)    ; auto-disassemble LLVM bitcode
@@ -151,9 +160,6 @@
   (setq whitespace-global-modes
         '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
                  shell-script-mode sh-mode)))
-
-(use-package cedet)
-
 
 
 ;;-------------------------
@@ -278,6 +284,7 @@
 ;; Auto-complete
 (use-package auto-complete
   :ensure t
+  :disabled t
   :config
   ;; add to dictionary directories
   (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")

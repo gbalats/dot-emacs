@@ -14,3 +14,6 @@
 	path = site-lisp/lb-datalog-mode
 	url = git@github.com:gbalats/lb-datalog-mode.git
 	branch = master
+[submodule "site-lisp/cedet"]
+	path = site-lisp/cedet
+	url = git@github.com:gbalats/cedet.git
