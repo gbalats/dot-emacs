@@ -15,6 +15,7 @@
 (defcustom project-top-build-tools
   '(("make" . "Makefile")
     ("ant"  . "build.xml")
+    ("gradle" . "build.gradle")
     ("mvn"  . "pom.xml"))
   "Build configuration files per tool."
   :type '(alist :value-type (group string))
