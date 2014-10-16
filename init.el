@@ -245,7 +245,10 @@
 (use-package flycheck
   :ensure t
   :config
-  (add-hook 'prog-mode-hook 'flycheck-mode))
+  (add-hook 'prog-mode-hook 'flycheck-mode)
+  (add-hook 'emacs-lisp-mode-hook
+            (function (lambda ()
+                        (setq flycheck-emacs-lisp-load-path load-path)))))
 
 ;; Transparent zenburn theme
 (use-package color-theme
