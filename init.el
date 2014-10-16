@@ -179,6 +179,12 @@
                   (lambda () (linum-mode -1)))
   :bind ("C-c m" . magit-status))
 
+;; Multiple cursors
+(use-package multiple-cursors
+  :ensure t
+  :bind ("C-c C-s" . mc/edit-lines)
+        ("C-c s" . mc/mark-more-like-this-extended))
+
 ;; window-switching
 (use-package win-switch
   :ensure t
