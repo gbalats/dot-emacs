@@ -364,7 +364,9 @@
 ;; LB-Datalog mode
 (use-package lb-datalog-mode
   :mode "\\.logic\\'"
-  :load-path "lb-datalog-mode/")
+  :load-path "lb-datalog-mode/"
+  :config
+  (use-package lb-datalog-mode-expansions))
 
 ;; LLVM mode
 (use-package llvm-mode

@@ -14,7 +14,10 @@ elisp.src += $(wildcard  site-lisp/lb-datalog-mode/*.el)
 elisp.src += $(addprefix site-lisp/llvm/,emacs.el llvm-mode.el tablegen-mode.el)
 elisp.src += $(addprefix site-lisp/use-package/, use-package.el bind-key.el)
 elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))
-elisp.lib := $(addprefix -L $(elisp.dir)/,etc use-package)
+elisp.lib := $(addprefix -L $(elisp.dir)/,etc use-package lb-datalog-mode)
+
+# Add expand-region to libraries
+elisp.lib += -L $(wildcard $(emacs.dir)/elpa/expand-region-*/)
 
 # Compiled files
 elisp.out += $(addsuffix c,$(filter-out $(emacs.dir)/init.el,$(elisp.out)))
