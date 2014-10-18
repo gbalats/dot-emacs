@@ -58,8 +58,6 @@
   (normal-top-level-add-subdirs-to-load-path))
 
 
-(require 'autodisass-java-bytecode)   ; auto-disassemble Java bytecode
-(require 'autodisass-llvm-bitcode)    ; auto-disassemble LLVM bitcode
 (require 'use-package)
 
 
@@ -170,6 +168,10 @@
 (use-package package
   :config
   (use-package prelude-packages))
+
+;; automatic disassembly
+(use-package autodisass-java-bytecode)   ; auto-disassemble Java bytecode
+(use-package autodisass-llvm-bitcode)    ; auto-disassemble LLVM bitcode
 
 ;; Magit
 (use-package magit

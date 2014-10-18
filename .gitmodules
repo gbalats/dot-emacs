@@ -2,14 +2,6 @@
 	path = site-lisp/use-package
 	url = git@github.com:jwiegley/use-package.git
 	branch = master
-[submodule "site-lisp/autodisass-java-bytecode"]
-	path = site-lisp/autodisass-java-bytecode
-	url = git@github.com:gbalats/autodisass-java-bytecode.git
-	branch = master
-[submodule "site-lisp/autodisass-llvm-bitcode"]
-	path = site-lisp/autodisass-llvm-bitcode
-	url = git@github.com:gbalats/autodisass-llvm-bitcode.git
-	branch = master
 [submodule "site-lisp/lb-datalog-mode"]
 	path = site-lisp/lb-datalog-mode
 	url = git@github.com:gbalats/lb-datalog-mode.git

@@ -8,8 +8,6 @@ elisp.src := init.el
 
 # Add various elisp Modules
 elisp.src += $(wildcard  site-lisp/etc/*.el)
-elisp.src += $(wildcard  site-lisp/autodisass-java-bytecode/*.el)
-elisp.src += $(wildcard  site-lisp/autodisass-llvm-bitcode/*.el)
 elisp.src += $(wildcard  site-lisp/lb-datalog-mode/*.el)
 elisp.src += $(addprefix site-lisp/llvm/,emacs.el llvm-mode.el tablegen-mode.el)
 elisp.src += $(addprefix site-lisp/use-package/, use-package.el bind-key.el)
