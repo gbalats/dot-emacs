@@ -26,21 +26,12 @@ all:
 
 
 #----------------------------------------
-# LLVM Emacs Extensions
+# Miscellaneous optional utilities
 #----------------------------------------
 
-llvm.dir := site-lisp/llvm
-llvm.url := http://llvm.org/svn/llvm-project/llvm/trunk/utils/emacs/
-
-# Create llvm directory
-$(llvm.dir):
-	$(WGET) -P $@ -r --no-parent -nd -A.el -e robots=off $(llvm.url)
-
-# Download emacs-llvm sources before compiling
-$(elisp.out): | $(llvm.dir)
-
-.PHONY: llvm
-llvm: $(llvm.dir)
+include cedet.mk				# install CEDET extensions
+include llvm.mk					# install LLVM emacs extensions
+include thesaurus.mk			# build thesaurs dictionary
 
 
 #----------------------------------------
@@ -64,43 +55,6 @@ clean:
 .PHONY: clean.elc
 clean.elc:
 	rm -f $(filter %.elc,$(elisp.out))
-
-
-#----------------------------------------
-# Thesaurus Specific
-#----------------------------------------
-
-thesaurus     := $(emacs.dir)/thesaurus/mthesaur.txt
-thesaurus.url := ftp://ibiblio.org/pub/docs/books/gutenberg/etext02/mthes10.zip
-thesaurus.zip := /tmp/mthesaur.zip
-
-.INTERMEDIATE: $(thesaurus.zip)
-$(thesaurus.zip):
-	$(info ... [elisp] downloading thesaurus ...)
-	$(WGET) $(thesaurus.url) -O /tmp/mthesaur.zip
-
-export UNZIP := -qq
-$(thesaurus): $(thesaurus.zip)
-	unzip -u $< -d $(@D)
-
-.PHONY: thesaurus
-thesaurus: $(thesaurus)
-
-
-#----------------------------------------
-# CEDET Setup
-#----------------------------------------
-
-cedet.dir := site-lisp/cedet
-
-.PHONY: $(cedet.dir)
-$(cedet.dir):
-	$(MAKE) --directory=$@
-
-$(elisp.dir)/cedet:
-	ln -s $(abspath $(cedet.dir)) $@
-
-cedet: $(cedet.dir) | $(elisp.dir)/cedet
 
 
 #----------------------------------------
