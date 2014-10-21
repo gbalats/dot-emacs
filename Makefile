@@ -14,9 +14,6 @@ elisp.src += $(addprefix site-lisp/use-package/, use-package.el bind-key.el)
 elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))
 elisp.lib := $(addprefix -L $(elisp.dir)/,etc use-package lb-datalog-mode)
 
-# Add expand-region to libraries
-elisp.lib += -L $(wildcard $(emacs.dir)/elpa/expand-region-*/)
-
 # Compiled files
 elisp.out += $(addsuffix c,$(filter-out $(emacs.dir)/init.el,$(elisp.out)))
 
@@ -46,7 +43,7 @@ $(emacs.dir)/%.el: %.el
 	$(INSTALL) -m 444 -D $< $@
 
 $(filter %.elc,$(elisp.out)): %.elc: %.el
-	$(EMACS) $(elisp.lib) -f batch-byte-compile $<
+	$(EMACS) $(elisp.lib) --eval '(progn (package-initialize)(batch-byte-compile))' $<
 
 .PHONY: clean
 clean:
