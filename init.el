@@ -70,7 +70,7 @@
 (global-set-key [f4] 'goto-line)
 
 ;;; Since `M-<SPC>' is used by gnome, use `C-c <SPC>' instead
-(global-set-key (kbd "C-c <SPC>") 'just-one-space)
+(global-set-key (kbd "C-c C-<SPC>") 'just-one-space)
 
 ;; swap `C-a' with `M-m'
 (global-set-key (kbd "C-a") 'back-to-indentation)
@@ -172,6 +172,11 @@
 ;; automatic disassembly
 (use-package autodisass-java-bytecode)   ; auto-disassemble Java bytecode
 (use-package autodisass-llvm-bitcode)    ; auto-disassemble LLVM bitcode
+
+;; Quick move minor mode
+(use-package ace-jump-mode
+  :ensure t
+  :bind ("C-c <SPC>" . ace-jump-mode))
 
 ;; Magit
 (use-package magit
