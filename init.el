@@ -170,8 +170,10 @@
   (use-package prelude-packages))
 
 ;; automatic disassembly
-(use-package autodisass-java-bytecode)   ; auto-disassemble Java bytecode
-(use-package autodisass-llvm-bitcode)    ; auto-disassemble LLVM bitcode
+(use-package autodisass-java-bytecode   ; auto-disassemble Java bytecode
+  :ensure t)
+(use-package autodisass-llvm-bitcode    ; auto-disassemble LLVM bitcode
+  :ensure t)
 
 ;; Quick move minor mode
 (use-package ace-jump-mode
