@@ -180,6 +180,13 @@
   :ensure t
   :bind ("C-c <SPC>" . ace-jump-mode))
 
+;; Key chords
+(use-package key-chord
+  :ensure t
+  :init (key-chord-mode 1)
+  :config
+  (key-chord-define-global "fj" 'ace-jump-mode))
+
 ;; GNU Global Tags
 (use-package gtags
   :ensure t
