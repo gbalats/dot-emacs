@@ -180,6 +180,18 @@
   :ensure t
   :bind ("C-c <SPC>" . ace-jump-mode))
 
+;; GNU Global Tags
+(use-package gtags
+  :ensure t
+  :commands gtags-mode
+  :diminish gtags-mode
+  :init
+  (add-hook 'c-mode-common-hook #'(lambda () (gtags-mode t)))
+  :config
+  (bind-key "M-." 'gtags-find-tag)
+  (bind-key "C-c C-f" 'gtags-find-file)
+  (add-hook 'gtags-select-mode-hook #'(lambda () (hl-line-mode 1))))
+
 ;; Magit
 (use-package magit
   :ensure t
