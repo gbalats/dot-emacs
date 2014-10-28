@@ -185,7 +185,8 @@
   :ensure t
   :init (key-chord-mode 1)
   :config
-  (key-chord-define-global "fj" 'ace-jump-mode))
+  (key-chord-define-global "fj" 'ace-jump-mode)
+  (key-chord-define-global "dk" 'god-mode))
 
 ;; GNU Global Tags
 (use-package gtags
