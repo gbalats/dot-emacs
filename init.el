@@ -225,10 +225,10 @@
   (setq win-switch-other-window-first nil))
 
 ;; enable / disable easy keys (e.g., arrows)
-(use-package no-easy-keys
+(use-package guru-mode
   :ensure t
-  :bind ("<f5>" . no-easy-keys-minor-mode)
-  :init (no-easy-keys-minor-mode 0))
+  :init (add-hook 'prog-mode-hook 'guru-mode)
+  :config (setq guru-warn-only t))
 
 ;; Google this
 (use-package google-this
