@@ -211,8 +211,8 @@
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
-  :bind ("C-c C-s" . mc/edit-lines)
-        ("C-c s" . mc/mark-more-like-this-extended))
+  :bind ("C-c s" . mc/edit-lines)
+        ("C-c S" . mc/mark-more-like-this-extended))
 
 ;; window-switching
 (use-package win-switch
