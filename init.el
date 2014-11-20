@@ -186,7 +186,8 @@
   :init (key-chord-mode 1)
   :config
   (key-chord-define-global "fj" 'ace-jump-mode)
-  (key-chord-define-global "dk" 'god-mode))
+  (key-chord-define-global "dk" 'god-mode)
+  (key-chord-define-global "jl" 'win-switch-mode))
 
 ;; GNU Global Tags
 (use-package gtags
