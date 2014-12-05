@@ -118,6 +118,13 @@
   (use-package project-top)
   (setq compilation-scroll-output 'first-error))
 
+;; Ido
+(use-package ido
+  :init
+  (setq ido-enable-flex-matching t)
+  (ido-everywhere)
+  (ido-mode 1))
+
 ;; Dired
 (use-package find-dired
   :defer t
