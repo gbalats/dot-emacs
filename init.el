@@ -121,6 +121,13 @@
   (setq compilation-scroll-output 'first-error
         compilation-always-kill t))     ; kill old compile process
 
+;; Ido
+(use-package ido
+  :init
+  (setq ido-enable-flex-matching t)
+  (ido-everywhere)
+  (ido-mode 1))
+
 ;; Dired
 (use-package find-dired
   :defer t
