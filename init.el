@@ -163,12 +163,17 @@
 ;; Whitespace mode
 (use-package whitespace
   :init
-  (setq whitespace-line-column 90
-        whitespace-style '(face empty tabs lines-tail trailing))
+  (setq whitespace-style '(face empty tabs lines-tail trailing))
   (global-whitespace-mode t)
   (setq whitespace-global-modes
         '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
-                 shell-script-mode sh-mode python-mode)))
+                 shell-script-mode sh-mode python-mode))
+  (add-hook 'python-mode-hook
+            #'(lambda ()
+                (set (make-local-variable 'whitespace-line-column) 90)))
+  (add-hook 'java-mode-hook
+            #'(lambda ()
+                (set (make-local-variable 'whitespace-line-column) 100))))
 
 
 ;;-------------------------
