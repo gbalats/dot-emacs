@@ -30,6 +30,8 @@
  '(tab-width 4)
  '(tab-stop-list (number-sequence 4 80 4))
  '(indent-tabs-mode nil)
+ ;; flycheck options
+ '(flycheck-flake8-maximum-line-length 100)
  ;; other options
  '(auto-save-default nil)               ; no auto-save
  '(make-backup-files nil)               ; no backup files
