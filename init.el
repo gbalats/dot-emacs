@@ -156,7 +156,8 @@
 ;; Whitespace mode
 (use-package whitespace
   :init
-  (setq whitespace-style '(face empty tabs lines-tail trailing))
+  (setq whitespace-line-column 90
+        whitespace-style '(face empty tabs lines-tail trailing))
   (global-whitespace-mode t)
   (setq whitespace-global-modes
         '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
