@@ -390,19 +390,6 @@
 
 
 ;;-------------------------
-;; Extra packages (local)
-;;-------------------------
-
-
-;; Copying things without selecting them
-(use-package no-selection-copy
-  :bind (("C-c w" . copy-word)
-         ("C-c l" . copy-line)
-         ("C-c p" . copy-paragraph)))
-
-
-
-;;-------------------------
 ;; Major Modes (server)
 ;;-------------------------
 
