@@ -315,6 +315,13 @@
   :ensure t
   :bind ("C-c e" . er/expand-region))
 
+;; easy-kill (similar to expand-region)
+(use-package easy-kill
+  :ensure t
+  :config
+  (global-set-key [remap kill-ring-save] 'easy-kill)
+  (global-set-key [remap mark-sexp] 'easy-mark))
+
 (use-package god-mode
   :ensure t
   :bind ("C-c g" . god-local-mode)
