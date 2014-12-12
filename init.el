@@ -118,7 +118,8 @@
   :bind ("C-c c" . recompile)
   :config
   (use-package project-top)
-  (setq compilation-scroll-output 'first-error))
+  (setq compilation-scroll-output 'first-error
+        compilation-always-kill t))     ; kill old compile process
 
 ;; Dired
 (use-package find-dired
