@@ -160,7 +160,7 @@
   (global-whitespace-mode t)
   (setq whitespace-global-modes
         '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
-                 shell-script-mode sh-mode)))
+                 shell-script-mode sh-mode python-mode)))
 
 
 ;;-------------------------
