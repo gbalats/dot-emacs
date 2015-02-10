@@ -121,12 +121,12 @@
   (setq compilation-scroll-output 'first-error
         compilation-always-kill t))     ; kill old compile process
 
-;; Ido
-(use-package ido
-  :init
-  (setq ido-enable-flex-matching t)
-  (ido-everywhere)
-  (ido-mode 1))
+;; ;; Ido
+;; (use-package ido
+;;   :init
+;;   (setq ido-enable-flex-matching t)
+;;   (ido-everywhere)
+;;   (ido-mode 1))
 
 ;; Dired
 (use-package find-dired
@@ -195,6 +195,17 @@
 (use-package ace-jump-mode
   :ensure t
   :bind ("C-c <SPC>" . ace-jump-mode))
+
+;; Flx-Ido
+(use-package flx-ido
+  :ensure t
+  :init
+  (ido-everywhere 1)
+  (ido-mode 1)
+  (flx-ido-mode 1)
+  ;; disable ido faces to see flx highlights.
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-faces nil))
 
 ;; Key chords
 (use-package key-chord
