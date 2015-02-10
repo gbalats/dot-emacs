@@ -275,6 +275,12 @@
   :ensure t
   :disabled t)
 
+;; Projectile
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-global-mode))
+
 ;; AucTex
 (use-package tex-site
   :ensure auctex
