@@ -121,13 +121,6 @@
   (setq compilation-scroll-output 'first-error
         compilation-always-kill t))     ; kill old compile process
 
-;; ;; Ido
-;; (use-package ido
-;;   :init
-;;   (setq ido-enable-flex-matching t)
-;;   (ido-everywhere)
-;;   (ido-mode 1))
-
 ;; Dired
 (use-package find-dired
   :defer t
@@ -198,6 +191,7 @@
 
 ;; Flx-Ido
 (use-package flx-ido
+  :disabled t
   :ensure t
   :init
   (ido-everywhere 1)
@@ -347,6 +341,17 @@
 (use-package expand-region
   :ensure t
   :bind ("C-c e" . er/expand-region))
+
+(use-package hippie-exp
+  :ensure t
+  :bind ("M-/" . hippie-expand))
+
+(use-package helm
+  :ensure t
+  :diminish helm-mode
+  :init
+  (require 'helm-config)
+  (helm-mode 1))
 
 ;; easy-kill (similar to expand-region)
 (use-package easy-kill
