@@ -146,6 +146,10 @@
   :commands electric-pair-mode
   :idle (electric-pair-mode t))
 
+;; Move windows with shift-arrow keys
+(use-package windmove
+  :config (windmove-default-keybindings 'shift))
+
 ;; Tramp
 (use-package tramp
   :config
@@ -207,8 +211,8 @@
   :init (key-chord-mode 1)
   :config
   (key-chord-define-global "fj" 'ace-jump-mode)
-  (key-chord-define-global "dk" 'god-mode)
-  (key-chord-define-global "jl" 'win-switch-mode))
+  ;; (key-chord-define-global "jl" 'win-switch-mode)
+  (key-chord-define-global "dk" 'god-mode))
 
 ;; GNU Global Tags
 (use-package gtags
@@ -238,6 +242,7 @@
 
 ;; window-switching
 (use-package win-switch
+  :disabled t
   :ensure t
   :commands win-switch-mode
   :idle (win-switch-mode)
