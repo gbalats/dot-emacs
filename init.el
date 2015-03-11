@@ -216,7 +216,7 @@
   :init (key-chord-mode 1)
   :config
   (key-chord-define-global "fj" 'ace-jump-mode)
-  ;; (key-chord-define-global "jl" 'win-switch-mode)
+  (key-chord-define-global "jl" 'other-window)
   (key-chord-define-global "dk" 'god-mode))
 
 ;; GNU Global Tags
