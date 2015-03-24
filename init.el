@@ -437,6 +437,18 @@
   (defun my-java-mode-hook ()
     "Personalized java mode."
     (c-set-offset 'inline-open 0))
+  ;; C++ hook
+  (defun my-c++-mode-hook ()
+    "Personalized c++ mode."
+    (setq c-basic-offset 4)
+    (c-set-offset 'inline-open 0)
+    (c-set-offset 'brace-list-open '*)
+    (c-set-offset 'block-open 0)
+    (c-set-offset 'inline-open 0)
+    (c-set-offset 'case-label '*)
+    (c-set-offset 'access-label '/))
+  ;; Add hooks
+  (add-hook 'c++-mode-hook 'my-c++-mode-hook)
   (add-hook 'java-mode-hook 'my-java-mode-hook))
 
 ;; PHP mode
