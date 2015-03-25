@@ -303,14 +303,15 @@
 ;; FlyMake
 (use-package flymake
   :ensure t
+  :config
+  (setq flymake-log-level 3)
   :init
   (add-hook 'c-mode-common-hook
-            (function (lambda ()
-                        (flymake-mode 1)
-                        (run-with-idle-timer 3 nil 'flymake-start-syntax-check)
-                        (local-set-key (kbd "M-n") 'flymake-goto-next-error)
-                        (local-set-key (kbd "M-p") 'flymake-goto-prev-error))))
-  (add-hook 'find-file-hook 'flymake-find-file-hook))
+            #'(lambda ()
+                (local-set-key (kbd "M-n") 'flymake-goto-next-error)
+                (local-set-key (kbd "M-p") 'flymake-goto-prev-error)))
+  ;; For some reason, flymake fails if started immediately
+  :idle (add-hook 'find-file-hook 'flymake-find-file-hook))
 
 (use-package flymake-cursor
   :ensure t)
