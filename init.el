@@ -198,6 +198,10 @@
   :ensure t
   :bind ("C-c <SPC>" . ace-jump-mode))
 
+(use-package windresize
+  :ensure t
+  :bind ("C-c r" . windresize))
+
 ;; Flx-Ido
 (use-package flx-ido
   :disabled t
