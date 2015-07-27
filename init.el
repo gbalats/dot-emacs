@@ -224,16 +224,15 @@
   (key-chord-define-global "dk" 'god-mode))
 
 ;; GNU Global Tags
-(use-package gtags
+(use-package ggtags
   :ensure t
-  :commands gtags-mode
-  :diminish gtags-mode
+  :commands ggtags-mode
+  :diminish ggtags-mode
   :init
-  (add-hook 'c-mode-common-hook #'(lambda () (gtags-mode t)))
-  :config
-  (bind-key "M-." 'gtags-find-tag)
-  (bind-key "C-c C-f" 'gtags-find-file)
-  (add-hook 'gtags-select-mode-hook #'(lambda () (hl-line-mode 1))))
+  (add-hook 'c-mode-common-hook
+            #'(lambda ()
+                (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                  (ggtags-mode 1)))))
 
 ;; Magit
 (use-package magit
