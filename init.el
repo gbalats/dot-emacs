@@ -24,6 +24,8 @@
  '(c-report-syntactic-errors t)
  '(c-backspace-function (quote delete-backward-char))
  '(c-basic-offset 4)
+ ;; magit options
+ '(magit-push-always-verify nil)
  ;; set some haskell coding style variables
  '(haskell-mode-hook (quote (turn-on-haskell-indent)))
  ;; configure tab behavior
