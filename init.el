@@ -26,6 +26,7 @@
  '(c-basic-offset 4)
  ;; magit options
  '(magit-push-always-verify nil)
+ '(magit-auto-revert-mode t)
  ;; set some haskell coding style variables
  '(haskell-mode-hook (quote (turn-on-haskell-indent)))
  ;; configure tab behavior
@@ -145,6 +146,7 @@
 
 ;; Electric pairs
 (use-package electric
+  :disabled t
   :commands electric-pair-mode
   :idle (electric-pair-mode t))
 
@@ -203,6 +205,14 @@
 (use-package windresize
   :ensure t
   :bind ("C-c r" . windresize))
+
+(use-package smartparens
+  :ensure t
+  :diminish smartparens-mode
+  :config
+  (progn
+    (require 'smartparens-config)
+    (smartparens-global-mode t)))
 
 ;; Flx-Ido
 (use-package flx-ido
