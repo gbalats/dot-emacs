@@ -8,7 +8,6 @@ elisp.src := init.el
 
 # Add various elisp Modules
 elisp.src += $(wildcard  site-lisp/etc/*.el)
-elisp.src += $(wildcard  site-lisp/lb-datalog-mode/*.el)
 elisp.src += $(addprefix site-lisp/llvm/,emacs.el llvm-mode.el tablegen-mode.el)
 elisp.src += $(addprefix site-lisp/use-package/, use-package.el bind-key.el)
 elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))
@@ -29,6 +28,18 @@ all:
 include cedet.mk				# install CEDET extensions
 include llvm.mk					# install LLVM emacs extensions
 include thesaurus.mk			# build thesaurs dictionary
+
+lb-datalog.dir := site-lisp/lb-datalog-mode
+lb-datalog.tar := $(wildcard $(lb-datalog.dir)/dist/lb-datalog-mode-*.tar)
+
+$(lb-datalog.dir):
+	$(MAKE) --directory=$@ dist
+
+$(lb-datalog.tar): $(lb-datalog.dir)
+	$(EMACS) --eval "(progn (package-initialize)(package-install-file \"$@\" ))"
+
+.PHONY: install-lb-datalog-mode $(lb-datalog.dir)
+install-lb-datalog-mode: $(lb-datalog.tar)
 
 
 #----------------------------------------
