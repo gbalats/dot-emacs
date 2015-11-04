@@ -32,7 +32,10 @@ include thesaurus.mk			# build thesaurs dictionary
 lb-datalog.dir := site-lisp/lb-datalog-mode
 lb-datalog.tar := $(wildcard $(lb-datalog.dir)/dist/lb-datalog-mode-*.tar)
 
-$(lb-datalog.dir):
+$(HOME)/.cask:
+	curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+
+$(lb-datalog.dir): | $(HOME)/.cask
 	$(MAKE) --directory=$@ dist
 
 $(lb-datalog.tar): $(lb-datalog.dir)
