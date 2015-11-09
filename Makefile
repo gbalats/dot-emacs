@@ -29,20 +29,13 @@ include cedet.mk				# install CEDET extensions
 include llvm.mk					# install LLVM emacs extensions
 include thesaurus.mk			# build thesaurs dictionary
 
-lb-datalog.dir := site-lisp/lb-datalog-mode
-lb-datalog.tar := $(wildcard $(lb-datalog.dir)/dist/lb-datalog-mode-*.tar)
-
 $(HOME)/.cask:
 	curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
-$(lb-datalog.dir): | $(HOME)/.cask
-	$(MAKE) --directory=$@ dist
+install-lb-datalog-mode: | $(HOME)/.cask
+	$(MAKE) --directory=site-lisp/lb-datalog-mode dist install
 
-$(lb-datalog.tar): $(lb-datalog.dir)
-	$(EMACS) --eval "(progn (package-initialize)(package-install-file \"$@\" ))"
-
-.PHONY: install-lb-datalog-mode $(lb-datalog.dir)
-install-lb-datalog-mode: $(lb-datalog.tar)
+.PHONY: install-lb-datalog-mode
 
 
 #----------------------------------------
