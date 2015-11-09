@@ -25,7 +25,7 @@ all:
 # Miscellaneous optional utilities
 #----------------------------------------
 
-include cedet.mk				# install CEDET extensions
+# include cedet.mk				# install CEDET extensions
 include llvm.mk					# install LLVM emacs extensions
 include thesaurus.mk			# build thesaurs dictionary
 

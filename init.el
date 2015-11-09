@@ -318,6 +318,7 @@
 ;; FlyMake
 (use-package flymake
   :ensure t
+  :disabled t
   :config
   (setq flymake-log-level 3)
   :init
@@ -491,7 +492,6 @@
 ;; LB-Datalog mode
 (use-package lb-datalog-mode
   :mode "\\.logic\\'"
-  :load-path "lb-datalog-mode/"
   :config
   (use-package lb-datalog-mode-expansions))
 
