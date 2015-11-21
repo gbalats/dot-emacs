@@ -231,9 +231,9 @@
   :ensure t
   :init (key-chord-mode 1)
   :config
-  (key-chord-define-global "fj" 'ace-jump-mode)
-  (key-chord-define-global "jl" 'other-window)
-  (key-chord-define-global "dk" 'god-mode))
+  (key-chord-define-global "jf" 'ace-jump-mode)
+  (key-chord-define-global "jg" 'god-mode)
+  (key-chord-define-global "jl" 'other-window))
 
 ;; GNU Global Tags
 (use-package ggtags
