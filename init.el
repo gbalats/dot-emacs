@@ -206,10 +206,11 @@
 (use-package smartparens
   :ensure t
   :diminish smartparens-mode
+  :commands smartparens-global-mode
   :config
-  (progn
-    (require 'smartparens-config)
-    (smartparens-global-mode t)))
+  (require 'smartparens-config)
+  :init
+  (smartparens-global-mode 1))
 
 ;; Flx-Ido
 (use-package flx-ido
