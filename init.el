@@ -117,7 +117,6 @@
 
 ;; Re-compile shortcut
 (use-package compile
-  :defer t
   :bind ("C-c c" . recompile)
   :config
   (use-package project-top)
@@ -126,29 +125,20 @@
 
 ;; Dired
 (use-package find-dired
-  :defer t
   :bind ("C-c f" . find-name-dired))
 
 ;; Rebind `C-x C-b' for `buffer-menu'
 (use-package ibuffer
-  :defer t
   :bind ("C-x C-b" . ibuffer))
 
 ;; Open shell with <f3>
 (use-package shell
-  :defer t
   :bind ("<f3>" . shell)
   :config
   (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
   (add-hook 'shell-mode-hook
             'ansi-color-for-comint-mode-on) ; add color to shell
   (setq comint-prompt-read-only t))         ; make shell-prompt read-only
-
-;; Electric pairs
-(use-package electric
-  :disabled t
-  :commands electric-pair-mode
-  :idle (electric-pair-mode t))
 
 ;; Move windows with shift-arrow keys
 (use-package windmove
@@ -174,9 +164,11 @@
   (setq whitespace-global-modes
         '(c-mode c++-mode lb-datalog-mode java-mode emacs-lisp-mode
                  shell-script-mode sh-mode python-mode))
+  ;; Python hook
   (add-hook 'python-mode-hook
             #'(lambda ()
                 (set (make-local-variable 'whitespace-line-column) 90)))
+  ;; Java hook
   (add-hook 'java-mode-hook
             #'(lambda ()
                 (set (make-local-variable 'whitespace-line-column) 100))))
@@ -254,7 +246,6 @@
 ;; Magit
 (use-package magit
   :ensure t
-  :commands magit-status
   :init (add-hook 'magit-status-mode-hook
                   (lambda () (linum-mode -1)))
   :bind ("C-c m" . magit-status))
@@ -265,31 +256,23 @@
   :bind ("C-c s" . mc/edit-lines)
         ("C-c S" . mc/mark-more-like-this-extended))
 
-;; window-switching
-(use-package win-switch
-  :disabled t
-  :ensure t
-  :commands win-switch-mode
-  :idle (win-switch-mode)
-  :config
-  (win-switch-setup-keys-ijkl "\C-xo")
-  (setq win-switch-idle-time 1.0)
-  (setq win-switch-other-window-first nil))
-
 ;; enable / disable easy keys (e.g., arrows)
 (use-package guru-mode
   :ensure t
+  :diminish guru-mode
   :init (add-hook 'prog-mode-hook 'guru-mode)
   :config (setq guru-warn-only t))
 
 ;; Google this
 (use-package google-this
   :ensure t
-  :init (google-this-mode t))
+  :diminish google-this-mode
+  :bind-keymap ("C-c /" . google-this-mode-submap))
 
 ;; Thesaurus
 (use-package synonyms
   :ensure t
+  :commands synonyms
   :config
   (setq synonyms-file        "~/.emacs.d/thesaurus/mthesaur.txt")
   (setq synonyms-cache-file  "~/.emacs.d/thesaurus/mthesaur.txt.cache"))
@@ -320,26 +303,27 @@
   (setq reftex-plug-into-AUCTeX t)
   (setq TeX-PDF-mode t))
 
-;; FlyMake
-(use-package flymake
-  :ensure t
-  :disabled t
-  :config
-  (setq flymake-log-level 3)
-  :init
-  (add-hook 'c-mode-common-hook
-            #'(lambda ()
-                (local-set-key (kbd "M-n") 'flymake-goto-next-error)
-                (local-set-key (kbd "M-p") 'flymake-goto-prev-error)))
-  ;; For some reason, flymake fails if started immediately
-  :idle (add-hook 'find-file-hook 'flymake-find-file-hook))
+;; ;; FlyMake
+;; (use-package flymake
+;;   :ensure t
+;;   :disabled t
+;;   :init
+;;   (add-hook 'c-mode-common-hook
+;;             #'(lambda ()
+;;                 (local-set-key (kbd "M-n") 'flymake-goto-next-error)
+;;                 (local-set-key (kbd "M-p") 'flymake-goto-prev-error)))
+;;   ;; For some reason, flymake fails if started immediately
+;;   :config
+;;   (setq flymake-log-level 3)
+;;   :idle (add-hook 'find-file-hook 'flymake-find-file-hook))
 
-(use-package flymake-cursor
-  :ensure t)
+;; (use-package flymake-cursor
+;;   :ensure t)
 
 (use-package flycheck
   :ensure t
-  :config
+  :defer t
+  :init
   (add-hook 'prog-mode-hook 'flycheck-mode)
   (add-hook 'emacs-lisp-mode-hook
             (function (lambda ()
@@ -388,9 +372,7 @@
 ;; easy-kill (similar to expand-region)
 (use-package easy-kill
   :ensure t
-  :config
-  (global-set-key [remap kill-ring-save] 'easy-kill)
-  (global-set-key [remap mark-sexp] 'easy-mark))
+  :bind ("M-w" . easy-kill))
 
 (use-package god-mode
   :ensure t
@@ -438,13 +420,14 @@
 ;; YASnippet Programming Templates
 (use-package yasnippet
   :ensure t
+  :diminish yas-minor-mode
+  :init
+  (yas-global-mode 1)
   :config
   ;; Remove Yasnippet's default tab key binding
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   ;; Set Yasnippet's key binding to shift+tab
-  (define-key yas-minor-mode-map (kbd "<backtab>") 'yas-expand)
-  :init
-  (yas-global-mode 1))
+  (define-key yas-minor-mode-map (kbd "<backtab>") 'yas-expand))
 
 
 
@@ -496,9 +479,7 @@
 
 ;; LB-Datalog mode
 (use-package lb-datalog-mode
-  :mode "\\.logic\\'"
-  :config
-  (use-package lb-datalog-mode-expansions))
+  :mode "\\.logic\\'")
 
 ;; LLVM mode
 (use-package llvm-mode
