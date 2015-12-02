@@ -151,6 +151,7 @@
 
 ;; Tramp
 (use-package tramp
+  :defer t
   :config
   (setq tramp-default-method "rsync")
   (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave-dir")
