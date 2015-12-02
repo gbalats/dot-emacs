@@ -158,6 +158,8 @@
 
 ;; Whitespace mode
 (use-package whitespace
+  :commands whitespace-mode
+  :bind ("C-c W" . whitespace-cleanup)
   :init
   (setq whitespace-style '(face empty tabs lines-tail trailing))
   (global-whitespace-mode t)
@@ -186,7 +188,10 @@
 (use-package diminish
   :ensure t
   :config
-  (diminish 'abbrev-mode))
+  (diminish 'abbrev-mode)
+  (diminish 'whitespace-mode)
+  (diminish 'whitespace-newline-mode)
+  (diminish 'global-whitespace-mode))
 
 ;; automatic disassembly
 (use-package autodisass-java-bytecode   ; auto-disassemble Java bytecode
@@ -220,6 +225,7 @@
   (ido-everywhere 1)
   (ido-mode 1)
   (flx-ido-mode 1)
+  :config
   ;; disable ido faces to see flx highlights.
   (setq ido-enable-flex-matching t)
   (setq ido-use-faces nil))
