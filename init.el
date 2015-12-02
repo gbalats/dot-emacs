@@ -191,6 +191,11 @@
   :config
   (use-package prelude-packages))
 
+(use-package diminish
+  :ensure t
+  :config
+  (diminish 'abbrev-mode))
+
 ;; automatic disassembly
 (use-package autodisass-java-bytecode   ; auto-disassemble Java bytecode
   :ensure t)
