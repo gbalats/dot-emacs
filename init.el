@@ -220,7 +220,6 @@
 
 ;; Flx-Ido
 (use-package flx-ido
-  :disabled t
   :ensure t
   :init
   (ido-everywhere 1)
@@ -230,6 +229,10 @@
   ;; disable ido faces to see flx highlights.
   (setq ido-enable-flex-matching t)
   (setq ido-use-faces nil))
+
+(use-package ido-vertical-mode
+  :ensure t
+  :init (ido-vertical-mode 1))
 
 ;; Key chords
 (use-package key-chord
@@ -369,6 +372,7 @@
 
 (use-package helm
   :ensure t
+  :disabled t
   :diminish helm-mode
   :init
   (require 'helm-config)
