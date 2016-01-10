@@ -218,21 +218,32 @@
   :init
   (smartparens-global-mode 1))
 
-;; Flx-Ido
-(use-package flx-ido
-  :ensure t
+;; Ido and related packages
+(use-package ido
   :init
-  (ido-everywhere 1)
-  (ido-mode 1)
-  (flx-ido-mode 1)
+  (progn
+    (ido-mode 1)
+    (ido-everywhere 1)
+    (use-package ido-vertical-mode
+      :ensure t
+      :init (ido-vertical-mode 1))
+    (use-package flx-ido
+      :ensure t
+      :init (flx-ido-mode 1))
+    (use-package ido-ubiquitous
+      :ensure t)
+    (use-package smex
+      :ensure t
+      :init (smex-initialize)
+      :bind ("M-x" . smex)))
   :config
-  ;; disable ido faces to see flx highlights.
-  (setq ido-enable-flex-matching t)
-  (setq ido-use-faces nil))
-
-(use-package ido-vertical-mode
-  :ensure t
-  :init (ido-vertical-mode 1))
+  (setq ido-enable-prefix nil
+        ido-enable-flex-matching t
+        ido-case-fold t
+        ido-use-filename-at-point nil
+        ido-max-prospects 10
+        ido-use-faces nil
+        ido-vertical-define-keys 'C-n-and-C-p-only))
 
 ;; Key chords
 (use-package key-chord
