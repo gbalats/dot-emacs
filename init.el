@@ -227,9 +227,6 @@
     (use-package ido-vertical-mode
       :ensure t
       :init (ido-vertical-mode 1))
-    (use-package flx-ido
-      :ensure t
-      :init (flx-ido-mode 1))
     (use-package ido-ubiquitous
       :ensure t)
     (use-package smex
