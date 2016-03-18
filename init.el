@@ -262,6 +262,12 @@
                 (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
                   (ggtags-mode 1)))))
 
+
+;; Speedbar
+(use-package sr-speedbar
+  :ensure t
+  :bind ("C-c DEL" . sr-speedbar-toggle))
+
 ;; Magit
 (use-package magit
   :ensure t
