@@ -29,6 +29,9 @@
  '(magit-auto-revert-mode t)
  ;; set some haskell coding style variables
  '(haskell-mode-hook (quote (turn-on-haskell-indent)))
+ ;; displaying time
+ '(display-time-day-and-date t)
+ '(display-time-24hr-format t)
  ;; configure tab behavior
  '(tab-width 4)
  '(tab-stop-list (number-sequence 4 80 4))
@@ -103,10 +106,7 @@
 ;; Configure Status Bar
 ;;-------------------------
 
-(setq display-time-day-and-date t
-      display-time-24hr-format t)
 (display-time)
-
 
 
 ;;---------------------
