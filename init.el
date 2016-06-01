@@ -220,19 +220,14 @@
 
 ;; Ido and related packages
 (use-package ido
+  :ensure t
   :init
   (progn
     (ido-mode 1)
     (ido-everywhere 1)
-    (use-package ido-vertical-mode
-      :ensure t
-      :init (ido-vertical-mode 1))
-    (use-package ido-ubiquitous
-      :ensure t)
-    (use-package smex
-      :ensure t
-      :init (smex-initialize)
-      :bind ("M-x" . smex)))
+    (use-package ido-ubiquitous)
+    (use-package ido-vertical-mode)
+    (use-package smex))
   :config
   (setq ido-enable-prefix nil
         ido-enable-flex-matching t
@@ -241,6 +236,18 @@
         ido-max-prospects 10
         ido-use-faces nil
         ido-vertical-define-keys 'C-n-and-C-p-only))
+
+(use-package ido-ubiquitous
+  :ensure t)
+
+(use-package ido-vertical-mode
+  :ensure t
+  :init (ido-vertical-mode 1))
+
+(use-package smex
+      :ensure t
+      :init (smex-initialize)
+      :bind ("M-x" . smex))
 
 ;; Key chords
 (use-package key-chord
