@@ -51,8 +51,7 @@
  ;; configure package repositories
  '(package-archives
    (quote (("gnu" . "http://elpa.gnu.org/packages/")
-           ("melpa" . "http://melpa.milkbox.net/packages/")
-           ("marmalade" . "http://marmalade-repo.org/packages/")))))
+           ("melpa" . "http://melpa.milkbox.net/packages/")))))
 
 
 ;; uncomment the following line to load CEDET (dev version)
@@ -197,6 +196,7 @@
 ;; automatic disassembly
 (use-package autodisass-java-bytecode   ; auto-disassemble Java bytecode
   :ensure t)
+
 (use-package autodisass-llvm-bitcode    ; auto-disassemble LLVM bitcode
   :ensure t)
 
