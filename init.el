@@ -245,9 +245,9 @@
   :init (ido-vertical-mode 1))
 
 (use-package smex
-      :ensure t
-      :init (smex-initialize)
-      :bind ("M-x" . smex))
+  :ensure t
+  :init (smex-initialize)
+  :bind ("M-x" . smex))
 
 ;; Key chords
 (use-package key-chord
