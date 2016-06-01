@@ -433,7 +433,10 @@
   (add-hook 'god-mode-disabled-hook 'god-mode-line-off))
 
 
-;; Auto-complete
+;;------------------------------------------------------------------------------
+;; Auto-completion Utilities
+;;------------------------------------------------------------------------------
+
 (use-package auto-complete
   :ensure t
   :disabled t
@@ -452,6 +455,22 @@
   (add-hook 'c++-mode-hook 'my:ac-c-header-init)
   (add-hook 'c-mode-hook 'my:ac-c-header-init))
 
+(use-package company
+  :ensure t
+  :bind ("C-<tab>" . company-complete)
+  :init
+  (global-company-mode)
+  :config
+  (setq company-backends (delete 'company-semantic company-backends))
+  ;; (setq company-backends '(company-clang))
+  (add-to-list 'company-backends 'company-gtags)
+  (add-to-list 'company-backends 'company-c-headers)
+  (setq company-idle-delay 0.5))
+
+(use-package company-c-headers
+  :ensure t
+  :config
+  (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.9.2/"))
 
 ;; YASnippet Programming Templates
 (use-package yasnippet
