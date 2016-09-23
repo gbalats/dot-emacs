@@ -267,7 +267,7 @@
   :ensure t
   :commands ggtags-mode
   :diminish ggtags-mode
-  :bind (("M-," . pop-tag-mark)
+  :bind (("M-*" . pop-tag-mark)
          ("C-c t s" . ggtags-find-other-symbol)
          ("C-c t h" . ggtags-view-tag-history)
          ("C-c t r" . ggtags-find-reference)
