@@ -529,6 +529,10 @@
   (progn
     (use-package inf-groovy)))
 
+;; Cucumber mode
+(use-package feature-mode
+  :ensure t
+  :mode "\\.feature\\'")
 
 
 ;;-------------------------
