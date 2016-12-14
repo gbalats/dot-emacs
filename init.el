@@ -491,7 +491,7 @@
 
 ;; Python dev environment
 (use-package elpy
-  :pin gnu
+  :pin elpy
   :ensure t
   :init
   (elpy-enable)
