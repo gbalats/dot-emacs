@@ -53,8 +53,9 @@
                          ("\\.pdf\\'" . "evince %s"))))
  ;; configure package repositories
  '(package-archives
-   (quote (("gnu" . "http://elpa.gnu.org/packages/")
-           ("melpa" . "http://melpa.milkbox.net/packages/")))))
+   (quote (("gnu"   . "http://elpa.gnu.org/packages/")
+           ("melpa" . "http://melpa.milkbox.net/packages/")
+           ("elpy"  . "https://jorgenschaefer.github.io/packages/")))))
 
 
 ;; uncomment the following line to load CEDET (dev version)
@@ -488,6 +489,15 @@
   ;; Set Yasnippet's key binding to shift+tab
   (define-key yas-minor-mode-map (kbd "<backtab>") 'yas-expand))
 
+;; Python dev environment
+(use-package elpy
+  :pin gnu
+  :ensure t
+  :init
+  (elpy-enable)
+  (when (require 'flycheck nil t)
+    (remove-hook 'elpy-modules 'elpy-module-flymake)
+    (add-hook 'elpy-mode-hook 'flycheck-mode)))
 
 
 ;;-------------------------
