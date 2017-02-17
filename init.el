@@ -282,9 +282,13 @@
 
 
 ;; Speedbar
-(use-package sr-speedbar
+(use-package neotree
   :ensure t
-  :bind ("C-c DEL" . sr-speedbar-toggle))
+  :bind ("C-c DEL" . neotree-toggle))
+
+;; (use-package sr-speedbar
+;;   :ensure t
+;;   :bind ("C-c DEL" . sr-speedbar-toggle))
 
 ;; Magit
 (use-package magit
