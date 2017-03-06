@@ -514,7 +514,9 @@
   ;; Java hook
   (defun my-java-mode-hook ()
     "Personalized java mode."
-    (c-set-offset 'inline-open 0))
+    (c-set-offset 'inline-open 0)
+    (c-set-offset 'arglist-intro '+)
+    (c-set-offset 'arglist-close 0))
   ;; C++ hook
   (defun my-c++-mode-hook ()
     "Personalized c++ mode."
