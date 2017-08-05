@@ -550,6 +550,20 @@
   :ensure t
   :mode "\\.feature\\'")
 
+;; Web mode
+(use-package web-mode
+  :ensure t
+  :mode "\\.\\(dj\\)?html?\\'"
+  :init
+  ;; Generic Web mode hook
+  (defun my-web-mode-hook ()
+    "Personalized web mode."
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-engines-alist
+          '(("django" . "\\.djhtml\\'"))))
+  ;; Add hooks
+  (add-hook 'web-mode-hook 'my-web-mode-hook))
+
 
 ;;-------------------------
 ;; Major Modes (local)
