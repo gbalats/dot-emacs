@@ -561,8 +561,14 @@
     (setq web-mode-markup-indent-offset 2)
     (setq web-mode-engines-alist
           '(("django" . "\\.djhtml\\'"))))
+  ;; Django hook
+  (defun my-django-mode-hook ()
+    (if (projectile-project-p)
+        (if (file-exists-p (concat (projectile-project-root) "manage.py"))
+            (web-mode-set-engine "django"))))
   ;; Add hooks
-  (add-hook 'web-mode-hook 'my-web-mode-hook))
+  (add-hook 'web-mode-hook 'my-web-mode-hook)
+  (add-hook 'web-mode-hook 'my-django-mode-hook))
 
 
 ;;-------------------------
