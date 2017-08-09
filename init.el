@@ -567,6 +567,12 @@
         (when (file-exists-p (concat (projectile-project-root) "manage.py"))
           (web-mode-set-engine "django")
 
+          ;; HTML auto functions
+          (setq web-mode-enable-auto-opening t)
+          (setq web-mode-enable-auto-closing t)
+          (setq web-mode-enable-auto-quoting t)
+          (setq web-mode-enable-auto-expanding t)
+
           ;; Auto-pairing
           (require 'smartparens)
           (sp-pair "{% " " %}")
