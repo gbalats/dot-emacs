@@ -564,8 +564,17 @@
   ;; Django hook
   (defun my-django-mode-hook ()
     (if (projectile-project-p)
-        (if (file-exists-p (concat (projectile-project-root) "manage.py"))
-            (web-mode-set-engine "django"))))
+        (when (file-exists-p (concat (projectile-project-root) "manage.py"))
+          (web-mode-set-engine "django")
+
+          ;; Auto-pairing
+          (require 'smartparens)
+          (sp-pair "{% " " %}")
+          (sp-pair "{{ " " }}")
+          (sp-pair "{" nil :actions :rem)
+          (sp-pair "<" ">")
+
+          (setq web-mode-enable-auto-pairing nil))))
   ;; Add hooks
   (add-hook 'web-mode-hook 'my-web-mode-hook)
   (add-hook 'web-mode-hook 'my-django-mode-hook))
