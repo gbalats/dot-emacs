@@ -577,6 +577,7 @@
           (require 'smartparens)
           (sp-pair "{% " " %}")
           (sp-pair "{{ " " }}")
+          (sp-pair "{# " " #}")
           (sp-pair "{" nil :actions :rem)
           (sp-pair "<" ">")
 
