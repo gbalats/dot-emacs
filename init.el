@@ -230,7 +230,7 @@
   (progn
     (ido-mode 1)
     (ido-everywhere 1)
-    (use-package ido-ubiquitous)
+    (use-package ido-completing-read+)
     (use-package ido-vertical-mode)
     (use-package smex))
   :config
@@ -242,7 +242,7 @@
         ido-use-faces nil
         ido-vertical-define-keys 'C-n-and-C-p-only))
 
-(use-package ido-ubiquitous
+(use-package ido-completing-read+
   :ensure t)
 
 (use-package ido-vertical-mode
