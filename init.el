@@ -316,6 +316,14 @@
   :diminish google-this-mode
   :bind-keymap ("C-c /" . google-this-mode-submap))
 
+;; Google translate
+(use-package google-translate
+  :ensure t
+  :bind ("C-c t" . google-translate-smooth-translate)
+  :init
+  (setq google-translate-translation-directions-alist
+        '(("el" . "en") ("en" . "el"))))
+
 ;; Thesaurus
 (use-package synonyms
   :ensure t
