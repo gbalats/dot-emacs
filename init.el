@@ -319,6 +319,7 @@
 ;; Thesaurus
 (use-package synonyms
   :ensure t
+  :disabled t
   :commands synonyms
   :config
   (setq synonyms-file        "~/.emacs.d/thesaurus/mthesaur.txt")
@@ -333,7 +334,7 @@
 (use-package projectile
   :ensure t
   :init
-  (projectile-global-mode))
+  (projectile-mode))
 
 ;; AucTex
 (use-package tex-site
@@ -377,7 +378,7 @@
                         (setq flycheck-emacs-lisp-load-path load-path)))))
 
 ;; Transparent zenburn theme
-(use-package color-theme
+(use-package zenburn-theme
   :ensure t
   :config
   (use-package zenburn-theme)
@@ -394,9 +395,6 @@
   (add-hook 'after-make-frame-functions 'on-frame-open)
   (add-hook 'window-setup-hook 'on-after-init)
   (menu-bar-mode 0))
-
-(use-package zenburn-theme
-  :ensure t)
 
 (use-package expand-region
   :ensure t
