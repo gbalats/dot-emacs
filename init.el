@@ -105,15 +105,6 @@
          (recenter)
          (setq this-command 'centerer1))))
 
-
-
-;;-------------------------
-;; Configure Status Bar
-;;-------------------------
-
-(display-time)
-
-
 ;;---------------------
 ;; Builtin packages
 ;;---------------------
