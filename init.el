@@ -88,6 +88,10 @@
 (global-set-key (kbd "C-a") 'back-to-indentation)
 (global-set-key (kbd "M-m") 'move-beginning-of-line)
 
+;; Useful for compilation/grep/lint modes
+(global-set-key (kbd "M-<down>") #'next-error)
+(global-set-key (kbd "M-<up>") (lambda () (interactive) (next-error -1)))
+
 ;; centers the screen around a line with `C-l'
 (global-set-key [(control l)]  'centerer)
 
@@ -108,7 +112,6 @@
 ;;---------------------
 ;; Builtin packages
 ;;---------------------
-
 
 ;; Re-compile shortcut
 (use-package compile
@@ -174,11 +177,6 @@
 ;;-------------------------
 ;; Extra packages (server)
 ;;-------------------------
-
-
-(use-package package
-  :config
-  (use-package prelude-packages))
 
 (use-package diminish
   :ensure t
@@ -263,9 +261,8 @@
   :ensure t
   :init (key-chord-mode 1)
   :config
-  (key-chord-define-global "jf" 'ace-jump-mode)
-  (key-chord-define-global "jg" 'god-mode)
-  (key-chord-define-global "jl" 'other-window))
+  (key-chord-define-global "jl" 'goto-line)
+  (key-chord-define-global "jf" 'avy-goto-char))
 
 ;; GNU Global Tags
 (use-package ggtags
