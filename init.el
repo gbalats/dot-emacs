@@ -334,9 +334,10 @@
   (setq synonyms-cache-file  "~/.emacs.d/thesaurus/mthesaur.txt.cache"))
 
 ;; communicating with clipboard
-(use-package xclip
+(use-package clipetty
   :ensure t
-  :disabled t)
+  :defer t
+  :bind ("C-x c" . clipetty-kill-ring-save))
 
 ;; Projectile
 (use-package projectile
