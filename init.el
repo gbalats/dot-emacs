@@ -126,9 +126,8 @@
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
 
-;; Open shell with <f3>
+;; Shell
 (use-package shell
-  :bind ("<f3>" . shell)
   :config
   (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
   (add-hook 'shell-mode-hook
