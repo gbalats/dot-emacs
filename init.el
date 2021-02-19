@@ -200,9 +200,10 @@
   :ensure t
   :bind ("C-c <SPC>" . avy-goto-char))
 
+;; Window resizing
 (use-package windresize
   :ensure t
-  :bind ("C-c r" . windresize))
+  :bind ("C-c C-r" . windresize))
 
 ;; Matching parentheses
 (use-package electric
