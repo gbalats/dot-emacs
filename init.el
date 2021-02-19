@@ -377,23 +377,11 @@
             (function (lambda ()
                         (setq flycheck-emacs-lisp-load-path load-path)))))
 
-;; Transparent zenburn theme
+;; Zenburn theme
 (use-package zenburn-theme
   :ensure t
   :config
-  (use-package zenburn-theme)
-
-  (defun on-frame-open (frame)
-    (unless (display-graphic-p frame))
-    (set-face-background 'default "unspecified-bg" frame))
-
-  (defun on-after-init ()
-    (let ((frame (selected-frame)))
-      (unless (display-graphic-p frame)
-        (set-face-background 'default "unspecified-bg" frame))))
-
-  (add-hook 'after-make-frame-functions 'on-frame-open)
-  (add-hook 'window-setup-hook 'on-after-init)
+  (load-theme 'zenburn t)
   (menu-bar-mode 0))
 
 (use-package expand-region
