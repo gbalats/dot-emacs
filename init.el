@@ -400,6 +400,11 @@
   :ensure t
   :bind ("C-c e" . er/expand-region))
 
+;; easy-kill (similar to expand-region)
+(use-package easy-kill
+  :ensure t
+  :bind ("M-w" . easy-kill))
+
 (use-package hippie-exp
   :ensure t
   :bind ("M-/" . hippie-expand))
@@ -412,37 +417,10 @@
   (require 'helm-config)
   (helm-mode 1))
 
-;; easy-kill (similar to expand-region)
-(use-package easy-kill
-  :ensure t
-  :bind ("M-w" . easy-kill))
 
-(use-package god-mode
-  :ensure t
-  :bind ("C-c g" . god-local-mode)
-  :defines saved-god-mode-line-faces
-  :config
-  (defun god-mode-line-on ()
-    "Alter the mode-line display. Intended to be used when in `god-mode'."
-    (setq-local saved-god-mode-line-faces
-                (cons (face-attribute 'mode-line :background)
-                      (face-attribute 'mode-line :foreground)))
-    (set-face-foreground 'mode-line "white")
-    (set-face-background 'mode-line "red")
-    (message "Entering god mode..."))
-  (defun god-mode-line-off ()
-    "Revert back to ordinary mode-line display."
-    (when saved-god-mode-line-faces
-      (set-face-background 'mode-line (car saved-god-mode-line-faces))
-      (set-face-foreground 'mode-line (cdr saved-god-mode-line-faces)))
-    (message "Exiting god mode..."))
-  (add-hook 'god-mode-enabled-hook 'god-mode-line-on)
-  (add-hook 'god-mode-disabled-hook 'god-mode-line-off))
-
-
-;;------------------------------------------------------------------------------
-;; Auto-completion Utilities
-;;------------------------------------------------------------------------------
+;; ;;------------------------------------------------------------------------------
+;; ;; Auto-completion Utilities
+;; ;;------------------------------------------------------------------------------
 
 (use-package auto-complete
   :ensure t
@@ -500,7 +478,6 @@
   (when (require 'flycheck nil t)
     (remove-hook 'elpy-modules 'elpy-module-flymake)
     (add-hook 'elpy-mode-hook 'flycheck-mode)))
-
 
 ;;-------------------------
 ;; Major Modes (server)
