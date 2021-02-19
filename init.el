@@ -50,29 +50,33 @@
  '(org-file-apps (quote ((auto-mode . emacs)
                          ("\\.mm\\'" . default)
                          ("\\.x?html?\\'" . default)
-                         ("\\.pdf\\'" . "evince %s"))))
- ;; configure package repositories
- '(package-archives
-   (quote (("gnu"   . "http://elpa.gnu.org/packages/")
-           ("melpa" . "http://melpa.milkbox.net/packages/")
-           ("elpy"  . "https://jorgenschaefer.github.io/packages/")))))
-
-
-;; uncomment the following line to load CEDET (dev version)
-;; (load-file (concat user-emacs-directory "site-lisp/etc/cedet-setup.el"))
+                         ("\\.pdf\\'" . "evince %s")))))
 
 ;; specify some additional load paths
 (let ((default-directory "~/.emacs.d/site-lisp/"))
-  (normal-top-level-add-subdirs-to-load-path))
+  (when (file-directory-p default-directory)
+    (normal-top-level-add-subdirs-to-load-path)))
 
+;;-------------------------
+;; Package setup
+;;-------------------------
 
-(require 'use-package)
+(require 'package)
+(setq package-enable-at-startup nil)   ; To prevent initialising twice
+(package-initialize)
 
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("elpy" . "https://jorgenschaefer.github.io/packages/") t)
+
+(dolist (package '(use-package))
+  (unless (package-installed-p package)
+     (package-refresh-contents)
+     (package-install package)
+     (require package)))
 
 ;;-------------------------
 ;; Global keybindings
 ;;-------------------------
-
 
 ;; set the keybinding so that you can use `f4' for goto line
 (global-set-key [f4] 'goto-line)
