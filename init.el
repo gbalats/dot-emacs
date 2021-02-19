@@ -122,10 +122,6 @@
 (use-package find-dired
   :bind ("C-c f" . find-name-dired))
 
-(use-package dired-x
-  :config
-  (define-key dired-mode-map (kbd "-") 'dired-up-directory))
-
 ;; Rebind `C-x C-b' for `buffer-menu'
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
