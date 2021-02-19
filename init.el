@@ -213,36 +213,39 @@
   :init
   (smartparens-global-mode 1))
 
-;; Ido and related packages
+;; Ido for interactive searches
 (use-package ido
   :ensure t
   :init
   (progn
     (ido-mode 1)
-    (ido-everywhere 1)
-    (use-package ido-completing-read+)
-    (use-package ido-vertical-mode)
-    (use-package smex))
+    (ido-everywhere t))
+  (defun gbalats/ido-clean-history ()
+    (interactive)
+    (setq ido-dir-file-cache nil
+          ido-work-file-list nil
+          ido-work-directory-list nil
+          ido-last-directory-list nil)
+    (delete-file ido-save-directory-list-file)
+    (ido-save-history)
+    (message "%s" "Ido history cleaned..."))
   :config
   (setq ido-enable-prefix nil
         ido-enable-flex-matching t
         ido-case-fold t
         ido-use-filename-at-point nil
-        ido-max-prospects 10
-        ido-use-faces nil
-        ido-vertical-define-keys 'C-n-and-C-p-only))
+        ido-max-prospects 7)
+  :bind ("C-c R" . gbalats/ido-clean-history))
 
 (use-package ido-completing-read+
+  :after ido
   :ensure t)
-
-(use-package ido-vertical-mode
-  :ensure t
-  :init (ido-vertical-mode 1))
 
 (use-package smex
   :ensure t
   :init (smex-initialize)
-  :bind ("M-x" . smex))
+  :bind (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands)))
 
 ;; Key chords
 (use-package key-chord
@@ -286,8 +289,10 @@
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
-  :bind ("C-c s" . mc/edit-lines)
-        ("C-c S" . mc/mark-more-like-this-extended))
+  :bind (("C-c V" . mc/mark-more-like-this-extended)
+         ("C-c v" . mc/edit-lines))
+  :init
+  (setq mc/edit-lines-empty-lines (quote ignore)))
 
 ;; enable / disable easy keys (e.g., arrows)
 (use-package guru-mode
@@ -351,22 +356,19 @@
   (setq reftex-plug-into-AUCTeX t)
   (setq TeX-PDF-mode t))
 
-;; ;; FlyMake
-;; (use-package flymake
-;;   :ensure t
-;;   :disabled t
-;;   :init
-;;   (add-hook 'c-mode-common-hook
-;;             #'(lambda ()
-;;                 (local-set-key (kbd "M-n") 'flymake-goto-next-error)
-;;                 (local-set-key (kbd "M-p") 'flymake-goto-prev-error)))
-;;   ;; For some reason, flymake fails if started immediately
-;;   :config
-;;   (setq flymake-log-level 3)
-;;   :idle (add-hook 'find-file-hook 'flymake-find-file-hook))
+;; Compilation and linters on-the-fly
+(use-package flymake
+  :ensure t
+  :disabled t
+  :config
+  (bind-keys ("C-c x <down>" . flymake-goto-next-error)
+             ("C-c x <up>" . flymake-goto-prev-error)
+             ("C-c x l" . flymake-show-diagnostics-buffer))
+  (setq flymake-log-level 3)
+  :idle (add-hook 'find-file-hook 'flymake-find-file-hook))
 
-;; (use-package flymake-cursor
-;;   :ensure t)
+(use-package flymake-cursor
+  :ensure t)
 
 (use-package flycheck
   :ensure t
