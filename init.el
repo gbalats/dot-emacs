@@ -204,7 +204,17 @@
   :ensure t
   :bind ("C-c r" . windresize))
 
+;; Matching parentheses
+(use-package electric
+  :init
+  (add-hook 'sh-mode-hook #'electric-pair-mode)
+  (add-hook 'makefile-mode-hook #'electric-pair-mode)
+  (add-hook 'emacs-lisp-mode-hook #'electric-pair-mode)
+  (add-hook 'python-mode-hook #'electric-pair-mode)
+  (add-hook 'c-mode-common-hook #'electric-pair-mode))
+
 (use-package smartparens
+  :disabled t
   :ensure t
   :diminish smartparens-mode
   :commands smartparens-global-mode
