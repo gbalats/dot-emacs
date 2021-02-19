@@ -296,6 +296,11 @@
   :init (add-hook 'prog-mode-hook 'guru-mode)
   :config (setq guru-warn-only t))
 
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
+
 ;; Google this
 (use-package google-this
   :ensure t
