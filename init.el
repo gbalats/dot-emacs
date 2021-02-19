@@ -196,9 +196,9 @@
   :ensure t)
 
 ;; Quick move minor mode
-(use-package ace-jump-mode
+(use-package avy
   :ensure t
-  :bind ("C-c <SPC>" . ace-jump-mode))
+  :bind ("C-c <SPC>" . avy-goto-char))
 
 (use-package windresize
   :ensure t
