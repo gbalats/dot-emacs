@@ -580,5 +580,7 @@
   :mode "\\.ll\\'"
   :load-path "llvm/")
 
+(setq custom-file "~/.emacs.d/package-selected-packages.el")
+(load custom-file)
 
 ;;; init.el ends here
