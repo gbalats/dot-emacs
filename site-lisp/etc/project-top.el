@@ -9,7 +9,7 @@
 ;;; Code:
 
 (require 'compile)
-(require 'cl)
+(require 'cl-lib)
 
 
 (defcustom project-top-build-tools
