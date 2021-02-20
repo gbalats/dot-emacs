@@ -1,5 +1,6 @@
 EMACS     := emacs --batch
 INSTALL   := install
+MKDIR     := mkdir -p
 WGET      := wget -q
 
 emacs.dir := $(HOME)/.emacs.d
@@ -46,7 +47,8 @@ all: $(elisp.out)
 
 $(emacs.dir)/%.el: %.el
 	$(info ... [elisp] installing $* ...)
-	$(INSTALL) -m 444 -D $< $@
+	@$(MKDIR) $(@D)
+	$(INSTALL) -m 444 $< $@
 
 $(filter %.elc,$(elisp.out)): %.elc: %.el
 	$(EMACS) $(elisp.lib) --eval '(progn (package-initialize)(batch-byte-compile))' $<
