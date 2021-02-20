@@ -570,10 +570,12 @@
 
 ;; LB-Datalog mode
 (use-package lb-datalog-mode
+  :disabled t
   :mode "\\.logic\\'")
 
 ;; LLVM mode
 (use-package llvm-mode
+  :disabled t
   :mode "\\.ll\\'"
   :load-path "llvm/")
 
