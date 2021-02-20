@@ -8,10 +8,10 @@ elisp.dir := $(emacs.dir)/site-lisp
 elisp.src := init.el
 
 # Add various elisp Modules
-elisp.src += $(wildcard  site-lisp/etc/*.el)
-elisp.src += $(addprefix site-lisp/llvm/,emacs.el llvm-mode.el tablegen-mode.el)
+loadextra := 0
+
+elisp.src += $(wildcard  site-lisp/etc/project-top.el)
 elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))
-elisp.lib := $(addprefix -L $(elisp.dir)/,etc lb-datalog-mode)
 
 # Compiled files
 elisp.out += $(addsuffix c,$(filter-out $(emacs.dir)/init.el,$(elisp.out)))
@@ -21,13 +21,21 @@ elisp.out += $(addsuffix c,$(filter-out $(emacs.dir)/init.el,$(elisp.out)))
 all:
 
 
+ifeq ($(loadextra), 1)
+
+elisp.src += $(wildcard  site-lisp/etc/*.el)
+elisp.src += $(addprefix site-lisp/llvm/,emacs.el llvm-mode.el tablegen-mode.el)
+elisp.lib := $(addprefix -L $(elisp.dir)/,etc lb-datalog-mode)
+
+include cedet.mk				# install CEDET extensions
+include llvm.mk					# install LLVM emacs extensions
+include thesaurus.mk			# build thesaurs dictionary
+
+endif
+
 #----------------------------------------
 # Miscellaneous optional utilities
 #----------------------------------------
-
-# include cedet.mk				# install CEDET extensions
-include llvm.mk					# install LLVM emacs extensions
-include thesaurus.mk			# build thesaurs dictionary
 
 $(HOME)/.cask:
 	curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
