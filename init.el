@@ -71,8 +71,19 @@
 (dolist (package '(use-package))
   (unless (package-installed-p package)
      (package-refresh-contents)
-     (package-install package)
-     (require package)))
+     (package-install package)))
+
+(require 'use-package)
+
+;; Magit
+(use-package magit
+  :ensure t
+  :config
+  :init
+  (require 'magit-process)
+  (add-hook 'magit-status-mode-hook
+            (lambda () (linum-mode -1)))
+  :bind ("C-c m" . magit-status))
 
 ;;-------------------------
 ;; Global keybindings
@@ -286,16 +297,6 @@
 (use-package neotree
   :disabled t
   :bind ("C-c DEL" . neotree-toggle))
-
-;; Magit
-(use-package magit
-  :ensure t
-  :config
-  :init
-  (require 'magit-process)
-  (add-hook 'magit-status-mode-hook
-            (lambda () (linum-mode -1)))
-  :bind ("C-c m" . magit-status))
 
 ;; Multiple cursors
 (use-package multiple-cursors
