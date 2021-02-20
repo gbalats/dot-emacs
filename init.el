@@ -290,8 +290,11 @@
 ;; Magit
 (use-package magit
   :ensure t
-  :init (add-hook 'magit-status-mode-hook
-                  (lambda () (linum-mode -1)))
+  :config
+  :init
+  (require 'magit-process)
+  (add-hook 'magit-status-mode-hook
+            (lambda () (linum-mode -1)))
   :bind ("C-c m" . magit-status))
 
 ;; Multiple cursors
