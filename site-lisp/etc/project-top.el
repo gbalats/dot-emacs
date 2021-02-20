@@ -9,8 +9,7 @@
 ;;; Code:
 
 (require 'compile)
-(require 'cl-lib)
-
+(require 'cl-macs)
 
 (defcustom project-top-build-tools
   '(("make" . "Makefile")
@@ -21,11 +20,10 @@
   :type '(alist :value-type (group string))
   :group 'project-top)
 
-
-(defun project-top-find (command-string)
+(cl-defun project-top-find (command-string)
   "Return the projects's top directory given a COMMAND-STRING for compilation."
-  (loop for (key . value) in project-top-build-tools
-        when (string-match (concat "^" key "\\b") command-string)
+  (cl-loop for (key . value) in project-top-build-tools
+        if (string-match (concat "^" key "\\b") command-string)
         return (locate-dominating-file default-directory value)))
 
 (defun project-top-start-hook ()
