@@ -62,11 +62,11 @@
 ;;-------------------------
 
 (require 'package)
-(setq package-enable-at-startup nil)   ; To prevent initialising twice
-(package-initialize)
-
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("elpy" . "https://jorgenschaefer.github.io/packages/") t)
+(setq package-enable-at-startup nil)   ; To prevent initialising twice
+(package-initialize)
 
 (dolist (package '(use-package))
   (unless (package-installed-p package)
