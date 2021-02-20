@@ -580,20 +580,4 @@
   :load-path "llvm/")
 
 
-
-;;-------------------------
-;; Custom Faces
-;;-------------------------
-
-
-;; TODO: remove this in the future as it is replicating the faces
-;; configured by zenburn, which for some reason they are not set.
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(flymake-errline ((t (:foreground "#BC8383" :underline t :weight bold))))
- '(flymake-warnline ((t (:foreground "#DFAF8F" :underline t :weight bold)))))
-
 ;;; init.el ends here
