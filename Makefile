@@ -9,9 +9,8 @@ elisp.src := init.el
 # Add various elisp Modules
 elisp.src += $(wildcard  site-lisp/etc/*.el)
 elisp.src += $(addprefix site-lisp/llvm/,emacs.el llvm-mode.el tablegen-mode.el)
-elisp.src += $(addprefix site-lisp/use-package/, use-package.el bind-key.el)
 elisp.out := $(addprefix $(emacs.dir)/, $(elisp.src))
-elisp.lib := $(addprefix -L $(elisp.dir)/,etc use-package lb-datalog-mode)
+elisp.lib := $(addprefix -L $(elisp.dir)/,etc lb-datalog-mode)
 
 # Compiled files
 elisp.out += $(addsuffix c,$(filter-out $(emacs.dir)/init.el,$(elisp.out)))
@@ -59,12 +58,3 @@ clean:
 .PHONY: clean.elc
 clean.elc:
 	rm -f $(filter %.elc,$(elisp.out))
-
-
-#----------------------------------------
-# Dependencies
-#----------------------------------------
-
-use-package.dir := $(elisp.dir)/use-package
-
-$(use-package.dir)/use-package.elc: $(use-package.dir)/bind-key.el
